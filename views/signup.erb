@@ -1,0 +1,22 @@
+<form action="/signup" method="post">
+	<input type="text" name="username" placeholder="username"/>
+	<input type="text" name="firstname" placeholder="First Name"/>
+	<input type="text" name="lastname" placeholder="Last Name"/>
+	<input type="text" name="user_avatar" placeholder="User Image"/>
+	<input type="submit" value="Add User">
+</form>
+
+
+<% if @users %>
+	<% @users.each do |user| %>
+		<article>
+			<p>
+				<%= user.username %>
+				<%= user.firstname %>
+				<%= user.lastname %>
+				<%= user.user_avatar %>
+			</p>
+			<span><a href="/<%= user.username %>/edit">[edit]</a></span>
+		</article>
+	<% end %>
+<% end %>

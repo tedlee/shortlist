@@ -11,25 +11,112 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline; }
-
-html {
-  line-height: 1; 
-}
-
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline; }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
-  display: block; 
+	display: block; 
 }
 
 body {
-  background: black;
-  color: #f3f1f4;
-  font-family: 'Vollkorn', sans-serif;
-  font-weight: 200;
+	background-color: #e2e1e1;
+	color: black;
+	font-family: 'Vollkorn', sans-serif;
+	font-weight: 200;
+}
+
+html, body {
+	line-height: 1; 
+	height: 100%;
+	margin: 0;
+}
+
+#wrap {
+	min-height: 100%;
+}
+
+#main {
+	overflow: auto;
+	padding-bottom: 20px;
+}
+
+.title {
+	margin-right: auto;
+	margin-left: auto;
+	width: 200px;
+	text-align: center;
+	display: block;
+	margin-top: 40px;
+	font: 2em Ubuntu;
+	text-shadow: 1px 1px 0 #656262;
+	color: rgb(192, 192, 192);
+}
+
+#logbox {
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 20px;
+
+
+	background-color: #f5f5f5;
+	width: 920px;
+	-webkit-border-radius: 5px;
+
+	box-shadow: 0 0 0 5px #ffffff, 0 0 15px #918282;
+	box-shadow:  0 0 2px #050505, 0 0 0 6px #ffffff, 0 0 25px #918282;
+}
+
+.log-entry {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: black;
+	font-family: 'Vollkorn', sans-serif;
+}
+
+.log-date {
+	display: inline-block;
+	width: 300px;
+	text-align: left;
+	text-decoration: underline;
+	vertical-align: top;
+}
+
+.log-description {
+	display: inline-block;
+	width: 500px;
+	line-height: 1.25;
+}
+
+#footer {
+	position: relative;
+	margin-top: -20px; /* negative value of footer height */
+	height: 20px;
+	clear:both;
+	color: #656262;
+	text-align: center;
+	font-family: 'Ubuntu', serif;
+	font-weight: 100;
+}
+
+#footer ul li {
+	display: inline;
+	position: relative;
+}
+
+#footer ul li a {
+	text-decoration: none;
+	color: #656262;
+}
+
+#footer :not(:last-child):after {
+	content: " \B7 ";
+	padding-left: 5px;
+	padding-right: 5px; 
 }

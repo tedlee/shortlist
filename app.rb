@@ -18,6 +18,12 @@ class User
 	#property :email, 		String, format: :email_address  
 	property :user_avatar, 	Text, :format => :url, required: false
 	property :created_at, 	DateTime
+
+	def username= new_username
+		super new_username.downcase
+	end
+
+
 end
 
 configure :development do

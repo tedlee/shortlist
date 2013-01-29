@@ -11,8 +11,12 @@ set :views, settings.root + '/views'
 
 class User  
 	include DataMapper::Resource
-	#property :id, 			Serial, key: true
-	property :username,		String, required: true, key: true
+
+	# For some reason adding the property id leads to the following error: 
+	# The number of arguments for the key is invalid, expected 2 but was 1
+
+	#property :id, 			Serial
+	property :username,		String, required: true, :key => true
 	property :firstname, 	String, required: true
 	property :lastname, 	String, required: true
 	#property :email, 		String, format: :email_address  
@@ -23,8 +27,19 @@ class User
 		super new_username.downcase
 	end
 
-
+	has n, :links
 end
+
+class Link
+	include DataMapper::Resource
+
+	property :id,			Serial
+	property :title,		String, :length => 120
+	property :description,	String, :length => 120
+
+	belongs_to :user
+end
+
 
 configure :development do
 	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist")

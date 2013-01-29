@@ -11,23 +11,26 @@ set :views, settings.root + '/views'
 
 class User  
 	include DataMapper::Resource
-	property :id, Serial, key: true
-	property :username, String, required: true, unique_index: true
-	property :firstname, String, required: true
-	property :lastname, String, required: true
-	#property :email, String, format: :email_address  
-	property :user_avatar, Text, :format => :url, required: false
-	property :created_at, DateTime
+	#property :id, 			Serial, key: true
+	property :username,		String, required: true, key: true
+	property :firstname, 	String, required: true
+	property :lastname, 	String, required: true
+	#property :email, 		String, format: :email_address  
+	property :user_avatar, 	Text, :format => :url, required: false
+	property :created_at, 	DateTime
 end
 
 configure :development do
 	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist")
-    DataMapper.auto_migrate! # wipes everything
+	#DataMapper.finalize
+	DataMapper.auto_migrate! # wipes everything
 end 
 
 configure :production do
 	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist")
 	DataMapper.finalize
+
+	#shouldn't run auto upgrade in production
 	DataMapper.auto_upgrade!
 end
 

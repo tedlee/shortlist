@@ -98,15 +98,12 @@ end
 
 get "/:username" do
 	@user = User.get params[:username]
-
-	if @user.links
-		@links = Link.all(:user_username => @user.username)
-	end
+	#@links = Link.all(:user_username => @user.username)
 
 	# To get all the links from a user do @user.links.all()
 
 	if @user
-		@title = "The Shortlist of #{@user}"
+		@title = "The Shortlist of #{@user.username}"
 		erb :user
 	else
 		"That user doesn't exist yet :("

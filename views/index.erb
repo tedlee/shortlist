@@ -1,1 +1,13 @@
 <!-- Main Page Here -->
+
+<% if @links %>
+	<% @links.each do |link| %>
+		<article>
+			<p>
+				<a href="<%= link.url %>"> <%= link.title %> </a>
+				<%= link.description %>
+				[submitted by <a href="/<%= link.user_username %>"> <%= link.user_username %> </a>]
+			</p>
+		</article>
+	<% end %>
+<% end %>

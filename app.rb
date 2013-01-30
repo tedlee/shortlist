@@ -64,6 +64,7 @@ get "/" do
 	@title = "Shortlist"
 	#@user_count = User.all().count.to_s()
 	#set :erb, :layout => false
+	@links = Link.all()
 	erb :index
 end
 

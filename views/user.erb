@@ -1,21 +1,20 @@
-<!doctype html> 
-<html lang="en">
-
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="../styles/style.css" type="text/css" />
-	<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
-	<script src="../scripts/main.js"></script>
+<form action="/<%= @user.username %>/add" method="post">
+	<input type="text" name="url" placeholder="Link"/>
+	<input type="text" name="title" placeholder="Title"/>
+	<input type="text" name="description" placeholder="Description"/>
+	<input type="submit" value="Add Link">
+</form>
 
 
-	<title>The Shortlist of <%= @username %></title> 
-	<meta name="description" content="Shortlist" />
-	<meta name="keywords" content="" />
-</head>
-	The Shortlist page of <%= @username %>.
-
-<body>
-
-</body>
-</html>
+<% if @user.links %>
+	<% @user.links.each do |link| %>
+		<article>
+			<p>
+				<%= link.url %>
+				<%= link.title %>
+				<%= link.description %>
+			</p>
+			<span><a href="/<%= @user.username %>/<%= link.id %>/edit">[edit]</a></span>
+		</article>
+	<% end %>
+<% end %>

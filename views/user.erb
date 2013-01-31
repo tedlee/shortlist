@@ -1,20 +1,26 @@
-<form action="/<%= @user.username %>/add" method="post">
-	<input type="text" name="url" placeholder="Link"/>
-	<input type="text" name="title" placeholder="Title"/>
-	<input type="text" name="description" placeholder="Description"/>
-	<input type="submit" value="Add Link">
-</form>
+
+<div class="hero"></div>
+
+<div id="shorts">
+	<form action="/<%= @user.username %>/add" method="post">
+		<input type="text" name="url" placeholder="Link"/>
+		<input type="text" name="title" placeholder="Title"/>
+		<input type="text" name="description" placeholder="Description"/>
+		<input type="submit" value="Add Link">
+	</form>
 
 
-<% if @user.links %>
-	<% @user.links.each do |link| %>
-		<article>
-			<p>
-				<%= link.url %>
-				<%= link.title %>
-				<%= link.description %>
-			</p>
-			<span><a href="/<%= @user.username %>/<%= link.id %>/edit">[edit]</a></span>
-		</article>
+
+	<% if @user.links %>
+		<% @user.links.each do |link| %>
+			<article>
+				<p>
+					<%= link.url %>
+					<%= link.title %>
+					<%= link.description %>
+				</p>
+				<span><a href="/<%= @user.username %>/<%= link.id %>/edit">[edit]</a></span>
+			</article>
+		<% end %>
 	<% end %>
-<% end %>
+</div>

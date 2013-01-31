@@ -44,6 +44,13 @@ html, body {
 	padding-bottom: 20px;
 }
 
+#shorts {
+	margin-right: auto;
+	margin-left: auto;
+	width: 800px;
+	width: 70%;
+}
+
 .title {
 	margin-right: auto;
 	margin-left: auto;
@@ -93,6 +100,18 @@ html, body {
 	width: 500px;
 	line-height: 1.25;
 }
+
+.hero {
+	margin-right: auto;
+	margin-left: auto;
+	width: 70%;
+	background-repeat: no-repeat;
+	height: 300px;
+	background-size: cover;
+	background-image: url("../images/nyc-park-bg.jpg");
+	background-position: 50% 50%
+}
+
 
 #footer {
 	position: relative;

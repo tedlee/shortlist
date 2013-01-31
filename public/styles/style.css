@@ -125,6 +125,17 @@ html, body {
 	margin-top: 0; /* Padding is set via #hero padding-top: 100px ; */
 }
 
+.hero-marker {
+	background: rgb(57, 57, 57);
+	height: 100px;
+	width: 6px;
+	position: relative;
+
+	opacity: 1;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 #footer {
 	position: relative;
 	margin-top: -20px; /* negative value of footer height */

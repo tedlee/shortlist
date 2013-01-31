@@ -39,6 +39,7 @@ class Link
 	property :url,			String, :length => 200
 	property :title,		String, :length => 120
 	property :description,	String, :length => 120
+	property :created_at, 	DateTime
 
 	belongs_to :user
 end
@@ -92,7 +93,7 @@ post "/:username/add" do
 
 	if @user
 
-		Link.create(:url => params[:url], :title => params[:title], :description => params[:description],  :user_username => @user.username)
+		Link.create(:url => params[:url], :title => params[:title], :description => params[:description],  :user_username => @user.username, :created_at => Time.now)
 		redirect back
 	end
 end

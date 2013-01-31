@@ -101,17 +101,29 @@ html, body {
 	line-height: 1.25;
 }
 
-.hero {
+#hero {
 	margin-right: auto;
 	margin-left: auto;
-	width: 70%;
+	padding-top: 150px; /* This is where the padding for avatar gets set */
+	width: 100%;
 	background-repeat: no-repeat;
-	height: 300px;
+	height: 150px; /* padding-top is added to this */
 	background-size: cover;
-	background-image: url("../images/nyc-park-bg.jpg");
-	background-position: 50% 50%
+	background-position: 50% 50%;
 }
 
+.avatar {
+	width: 125px;
+	display: block;
+	box-shadow: 0 0 0 2px #050505, 0 0 5px #918282;
+}
+
+#hero img{
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 5px;
+	margin-top: 0; /* Padding is set via #hero padding-top: 100px ; */
+}
 
 #footer {
 	position: relative;

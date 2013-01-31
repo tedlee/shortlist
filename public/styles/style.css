@@ -47,6 +47,7 @@ html, body {
 #shorts {
 	margin-right: auto;
 	margin-left: auto;
+	margin-top: 45px;
 	width: 800px;
 	width: 70%;
 }
@@ -61,6 +62,43 @@ html, body {
 	font: 2em Ubuntu;
 	text-shadow: 1px 1px 0 #656262;
 	color: rgb(192, 192, 192);
+}
+
+#time-bar {
+	width: 100%;
+	height: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+
+	display: block;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+
+	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
+
+	/*
+	-webkit-box-shadow: 0 2px 6px #777;
+	-moz-box-shadow: 0 2px 6px #777;
+	box-shadow: 0 2px 6px #777;
+	*/	
+
+
+	background-image: url(../images/time-bar.jpg);
+	background-position: 0px -1px;
+	background-repeat: repeat-x;
+}
+
+.current-date {
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+
+	/* should be 1.0 for targeting iOS */
+	font-size: 1.5em;
+	
+	font-weight: 400;00;
+	font-family: Raleway, sans-serif;
 }
 
 #logbox {
@@ -114,22 +152,22 @@ html, body {
 
 .avatar {
 	max-width: 125px;
-
 	max-height: 125px;
 	display: block;
 	box-shadow: 0 0 0 2px #050505, 0 0 5px #918282;
-}
-
-#hero img{
 	margin-right: auto;
 	margin-left: auto;
 	border-radius: 5px;
 	margin-top: 0; /* Padding is set via #hero padding-top: 100px ; */
 }
 
+#hero img{
+
+}
+
 .hero-marker {
 	background: rgb(57, 57, 57);
-	height: 100px;
+	height: 70px;
 	width: 6px;
 
 	opacity: 1;

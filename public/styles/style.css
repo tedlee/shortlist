@@ -97,8 +97,54 @@ html, body {
 	/* should be 1.0 for targeting iOS */
 	font-size: 1.5em;
 	
-	font-weight: 400;00;
+	font-weight: 400;
 	font-family: Raleway, sans-serif;
+}
+
+.short-container {
+	height: 420px;
+	background-color: white;
+}
+
+#short-cover {
+	margin-right: auto;
+	margin-left: auto;
+	width: 100%;
+	background-repeat: no-repeat;
+	height: 370px; 
+	background-size: cover;
+	background-position: 50% 50%;
+	border-bottom-color: rgb(57, 57, 57);
+	border-bottom-width: 5px;
+	border-style: solid;
+}
+
+#short-details {
+	display: block;
+	font-size: 1.5em;
+	font-weight: 400;
+	font-family: Raleway, sans-serif;
+	padding-top: 10px;
+	border-color: rgb(57, 57, 57);
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 5px;
+	border-style: solid;
+	height: 35px;
+	padding-left: 5px;
+}
+
+.short-number {
+	display: inline-block;
+	float: left;
+	margin-left: 15px;
+	font-weight: 700;
+}
+
+.short-description {
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
 }
 
 #logbox {

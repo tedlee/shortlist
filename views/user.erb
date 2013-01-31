@@ -7,16 +7,16 @@
 
 
 <div id="shorts">
-	<div id="time-bar"> <div class="current-date">Tuesday January 1st 2013</div> </div>
-
-	<form action="/<%= @user.username %>/add" method="post">
-		<input type="text" name="url" placeholder="Link"/>
-		<input type="text" name="title" placeholder="Title"/>
-		<input type="text" name="description" placeholder="Description"/>
-		<input type="submit" value="Add Link">
-	</form>
-
-
+	<div id="time-bar"> <div class="current-date">Tuesday January 1st 2013</div></div>
+	<div class="short-container">
+		<div id="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
+		<!-- <img src="../images/short-cover.jpg"> -->
+		<div id="short-details">
+			<div class="short-number">1)</div>
+			<div class="short-description">Really enjoyed this Pixar short La Luna</div>
+		</div>
+	</div>
+</div>
 
 	<% if @user.links %>
 		<% @user.links.each do |link| %>

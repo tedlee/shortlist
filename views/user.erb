@@ -13,7 +13,11 @@
 		<% @user.links.reverse.each do |link| %>
 
 				<div class="short-container">
-					<div id="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
+					<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
+						<div id="short-cover" style="background-image:url('<%= link.url %>')"> </div>
+					<% else %>
+						<div id="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
+					<% end %>
 					<div id="short-details">
 						<div class="short-number"> <%= count %>)</div>
 						<div class="short-description"><%= link.description %> — </div>

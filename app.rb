@@ -47,8 +47,9 @@ end
 configure :development do
 	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist")
 	DataMapper.auto_upgrade!
-	DataMapper.finalize
 	#DataMapper.auto_migrate! # wipes everything
+	DataMapper.finalize
+	
 end 
 
 configure :production do

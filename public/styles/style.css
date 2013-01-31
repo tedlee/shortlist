@@ -113,7 +113,9 @@ html, body {
 }
 
 .avatar {
-	width: 125px;
+	max-width: 125px;
+
+	max-height: 125px;
 	display: block;
 	box-shadow: 0 0 0 2px #050505, 0 0 5px #918282;
 }
@@ -129,7 +131,6 @@ html, body {
 	background: rgb(57, 57, 57);
 	height: 100px;
 	width: 6px;
-	position: relative;
 
 	opacity: 1;
 	margin-right: auto;

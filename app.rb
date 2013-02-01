@@ -77,13 +77,14 @@ get "/signup" do
 end
 
 get "/changelog" do
-	@title = "Steno - Changelog"
+	@title = "Shortlist - Signup"
 	erb :changelog
 end
 
 post "/signup" do
+	
 	User.create(:username => params[:username], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
-	redirect back
+	redirect params[:username]
 end
 
 post "/:username/add" do
@@ -92,7 +93,6 @@ post "/:username/add" do
 	puts "username submitted is: #{@user.username}"
 
 	if @user
-
 		Link.create(:url => params[:url], :title => params[:title], :user_username => @user.username, :created_at => Time.now)
 		redirect back
 	end
@@ -112,11 +112,16 @@ get "/:username" do
 	end
 end
 
-
-
-
-
-
 not_found do  
 	halt 404, 'No page for you.'  
+end
+
+
+def youtube_embed(youtube_url)
+
+	# Regex from https://gist.github.com/1254889
+	youtube_url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/]
+	youtube_id = $5
+
+	%Q{<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>}
 end

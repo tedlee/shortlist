@@ -64,6 +64,18 @@ html, body {
 	color: #a35151;
 }
 
+#signup-box {
+	width: 200px;
+	height: 150px;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	border-radius: 8px;
+	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
+	text-align: center;
+	padding: 15px;
+}
+
 #time-bar {
 	width: 100%;
 	height: 50px;

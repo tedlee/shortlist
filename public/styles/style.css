@@ -41,7 +41,7 @@ html, body {
 
 #main {
 	overflow: auto;
-	padding-bottom: 20px;
+	padding-bottom: 60px;
 }
 
 #shorts {
@@ -83,6 +83,24 @@ html, body {
 	box-shadow: 0 2px 6px #777;
 	*/	
 
+
+	background-image: url(../images/time-bar.jpg);
+	background-position: 0px -1px;
+	background-repeat: repeat-x;
+}
+
+#add-bar {
+	width: 100%;
+	height: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+
+	display: block;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+
+	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
 
 	background-image: url(../images/time-bar.jpg);
 	background-position: 0px -1px;
@@ -217,8 +235,8 @@ html, body {
 	margin-top: 0; /* Padding is set via #hero padding-top: 100px ; */
 }
 
-#hero img{
-
+.avatar:hover {
+	box-shadow: 0 0 0 2px #050505, 0 0 20px #706c6c;
 }
 
 .hero-marker {
@@ -234,7 +252,7 @@ html, body {
 #footer {
 	position: relative;
 	margin-top: -20px; /* negative value of footer height */
-	height: 20px;
+	height: 30px;
 	clear:both;
 	color: #656262;
 	text-align: center;

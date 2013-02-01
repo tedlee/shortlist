@@ -43,9 +43,9 @@
 	<% end %>
 	<div id="add-bar">
 		<form action="/<%= @user.username %>/add" method="post">
-			<input type="text" name="url" placeholder="Link"/>
-			<input type="text" name="title" placeholder="Title"/>
-			<input type="text" name="description" placeholder="Description"/>
+			<input type="text" name="url" placeholder="Link" autocomplete="off"/>
+			<input type="text" name="title" placeholder="Title" autocomplete="off"/>
+			<input type="text" name="description" placeholder="Description" autocomplete="off"/>
 			<input type="submit" value="Add Link">
 		</form>
 	</div>

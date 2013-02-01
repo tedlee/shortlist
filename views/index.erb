@@ -15,7 +15,7 @@
 						<%= youtube_embed(link.url) %>
 
 					<% else %>
-						<div class="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
+						<div class="short-cover" style="background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')"> </div>
 					<% end %>
 					<div id="short-details">
 						<div class="short-number"> <%= count %>)</div>
@@ -28,8 +28,8 @@
 				<% break if count==20 %>
 		<% end %>
 	<% end %>
-	<div id="add-bar" class="short-title">
-		Those are the most recent links — go check them out!
+	<div id="add-bar" class="short-title" style="font-weight: 200">
+		All done!
 	</div>
 </div>
 

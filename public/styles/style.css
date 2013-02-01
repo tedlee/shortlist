@@ -169,9 +169,8 @@ html, body {
 	font-weight: 700;
 }
 
-.short-description {
+.short-title {
 	display: inline-block;
-	float: left;
 	margin-left: 10px;
 }
 

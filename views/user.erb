@@ -33,7 +33,7 @@
 					<% end %>
 					<div id="short-details">
 						<div class="short-number"> <%= count %>)</div>
-						<div class="short-description"><%= link.description %> — </div>
+						<div class="short-title"><%= link.title %> — </div>
 						<a href="<%= link.url %>">Link</a>
 					</div>
 				</div> 
@@ -45,8 +45,7 @@
 		<form action="/<%= @user.username %>/add" method="post">
 			<input type="text" class="link-input" name="url" placeholder="Link" autocomplete="off"/>
 			<input type="text" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
-			<input type="text" class="link-input" name="description" placeholder="Description" autocomplete="off"/>
-			<input type="submit" class="link-input" value="Add Link">
+			<input type="submit" class="link-input link-button" value="Add Link">
 		</form>
 	</div>
 </div

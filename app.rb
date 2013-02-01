@@ -36,9 +36,9 @@ class Link
 	include DataMapper::Resource
 
 	property :id,			Serial
-	property :url,			String, :length => 200
-	property :title,		String, :length => 120
-	property :description,	String, :length => 120
+	property :url,			String, :length => 200, required: true
+	property :title,		String, :length => 120, required: true
+	#property :description,	String, :length => 120
 	property :created_at, 	DateTime
 
 	belongs_to :user
@@ -93,7 +93,7 @@ post "/:username/add" do
 
 	if @user
 
-		Link.create(:url => params[:url], :title => params[:title], :description => params[:description],  :user_username => @user.username, :created_at => Time.now)
+		Link.create(:url => params[:url], :title => params[:title], :user_username => @user.username, :created_at => Time.now)
 		redirect back
 	end
 end

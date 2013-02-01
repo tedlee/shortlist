@@ -34,7 +34,7 @@ class Link
 	include DataMapper::Resource
 
 	property :id,			Serial
-	property :url,			String, :length => 200, required: true
+	property :url,			String, :length => 500, required: true
 	property :title,		String, :length => 120, required: true
 	#property :description,	String, :length => 120
 	property :created_at, 	DateTime

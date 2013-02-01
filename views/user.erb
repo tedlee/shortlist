@@ -18,7 +18,7 @@
 						<%= youtube_embed(link.url) %>
 
 					<% else %>
-						<div class="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
+						<div class="short-cover" style="background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')"> </div>
 					<% end %>
 					<div id="short-details">
 						<div class="short-number"> <%= count %>)</div>
@@ -32,7 +32,7 @@
 	<% end %>
 	<div id="add-bar">
 		<form action="/<%= @user.username %>/add" method="post">
-			<input type="text" class="link-input" name="url" placeholder="Link" autocomplete="off"/>
+			<input type="text" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
 			<input type="text" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
 			<input type="submit" class="link-input link-button" value="Add Link">
 		</form>

@@ -65,7 +65,7 @@ html, body {
 }
 
 #signup-box {
-	width: 200px;
+	width: 250px;
 	height: 150px;
 	margin-right: auto;
 	margin-left: auto;
@@ -206,6 +206,7 @@ html, body {
 	font-size: 1em;
 	font-weight: bold;
 	display: block;
+	width: 220px;
 	background-color: #ffffff;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;

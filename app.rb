@@ -1,6 +1,4 @@
-require "sinatra" 
-#require "erb"
-require "pry"
+require "sinatra"
 require "data_mapper"
 
 configure :production do

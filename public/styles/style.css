@@ -121,6 +121,10 @@ html, body {
 
 .short-container {
 	background-color: white;
+	border-color: rgb(57, 57, 57);
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-style: solid;
 }
 
 .short-cover {
@@ -202,7 +206,7 @@ html, body {
 }
 
 .link-button:hover{
-	box-shadow:0 0 10px #268E00;
+	box-shadow:0 0 10px #8EEC6A;
 }
 
 #logbox {

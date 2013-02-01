@@ -23,10 +23,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 body {
-	background-color: #e2e1e1;
+	background-image:url("../images/bg.png")
 	color: black;
-	font-family: 'Vollkorn', sans-serif;
-	font-weight: 200;
+	font-weight: 400;
+	font-family: Raleway, sans-serif;
 }
 
 html, body {
@@ -61,7 +61,7 @@ html, body {
 	margin-top: 40px;
 	font: 2em Ubuntu;
 	text-shadow: 1px 1px 0 #656262;
-	color: rgb(192, 192, 192);
+	color: #a35151;
 }
 
 #time-bar {
@@ -95,6 +95,7 @@ html, body {
 	margin-left: auto;
 	text-align: center;
 	padding-bottom: 10px;
+	padding-top: 10px;
 
 	display: block;
 	border-bottom-left-radius: 8px;
@@ -163,8 +164,13 @@ html, body {
 	text-decoration: none;
 	display: inline-block;
 	font-weight: 700;
-	margin-left: 10px;
 	color: rgb(78, 103, 165);
+}
+
+.short-author {
+	display: inline-block;
+	float: right;
+	margin-right: 10px;
 }
 
 .short-number {
@@ -185,7 +191,6 @@ html, body {
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
 	outline: none;
-	margin-top: 10px;
 	font-size: 1em;
 	font-weight: bold;
 	display: block;

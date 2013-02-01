@@ -175,6 +175,26 @@ html, body {
 	margin-left: 10px;
 }
 
+.link-input {
+	border: 3px solid rgb(30, 28, 28);
+	border: 3px solid rgba(30, 28, 28, 0.05);
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	outline: none;
+	margin-top: 10px;
+	font-size: 1em;
+	font-weight: bold;
+	display: block;
+	background-color: #ffffff;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	color: #383838;
+	padding: 2px 8px;
+	text-decoration: none;
+	display: inline-block;
+}
+
 #logbox {
 	margin-top: 20px;
 	margin-right: auto;

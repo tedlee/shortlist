@@ -2,6 +2,19 @@
 
 	<div class="log-entry">
 		<div class="log-date">
+			January 31st 2013
+		</div>
+		<div class="log-description">
+			I often wonder when something you're building goes from being a mis-mash of code that sort of works to something that looks enjoyable to use. I think today was that day. Working through the user profiles I'm really happy with how they look. It's simple with a big focus on the content. As of now it doesn't show link based on date but rather the three most recently submitted links. I need to figure out a way to deal with the three links a day limit. Still mulling that over. I'm really happy with how adding picture links works. It's not perfect but when an image (.png/.bmp/.gif/.jpg) is added it's used as the background for that Shortlists cover. And it scales really nicely! 
+			<br/><br/>
+			I was going to use embed.ly for doing links but found their jQuery plugin to be slow and not as customizable as I would have liked. So I went the route of writing my own embed code. It works but running a regex against a link to check if it is A) a YouTube link B) to grab the videoID I need for embedding. There are a handful of ways YouTube formats their links so refining the regex was a pain but it seems to work well on all links I'm posted so far. Deciding how the videos would scale horizontally was a bit of a challenge. Initially I wanted the video player to be 16:9 but obviouslly that led to problems with how you choose the right height for the video. I settled for videos that were 100% width of their parent space (so they take up the entire 'cover' area) and set a hard height value at 550px. 550px is larger than most other cover images but it leads to a better viewing experience. The embedded YouTube player is smart enough to stict to those constraints but add bars either along the bottom or along the sides of a video depending on the aspect ratio of the video and the current width of the browser window.
+			<br/><br/>
+			Tomorrow I want to have a look at adding a property to the Link class so users can select a media type. Also I'll probally add in the handy moment.js library for handling date manipulations. And maybe deploy to Heroku :)
+		</div>
+	</div>
+
+	<div class="log-entry">
+		<div class="log-date">
 			January 30th 2013
 		</div>
 		<div class="log-description">

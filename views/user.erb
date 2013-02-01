@@ -5,6 +5,16 @@
 	<div class="hero-marker"></div> 
 </div>
 
+<%
+	def youtube_embed(youtube_url)
+
+		# Regex from https://gist.github.com/1254889
+		youtube_url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/]
+		youtube_id = $5
+
+		%Q{<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>}
+	end
+%>
 
 <div id="shorts">
 	<div id="time-bar"> <div class="current-date">Tuesday January 1st 2013</div> </div>
@@ -14,9 +24,12 @@
 
 				<div class="short-container">
 					<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
-						<div id="short-cover" style="background-image:url('<%= link.url %>')"> </div>
+						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
+					<% elsif %w[www.youtube.com].include? URI.parse(link.url).host %>
+						<%= youtube_embed(link.url) %>
+
 					<% else %>
-						<div id="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
+						<div class="short-cover" style="background-image:url('../images/short-cover.jpg')"> </div>
 					<% end %>
 					<div id="short-details">
 						<div class="short-number"> <%= count %>)</div>

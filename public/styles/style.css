@@ -102,25 +102,27 @@ html, body {
 }
 
 .short-container {
-	height: 420px;
 	background-color: white;
 }
 
-#short-cover {
+.short-cover {
 	margin-right: auto;
 	margin-left: auto;
 	width: 100%;
 	background-repeat: no-repeat;
-	height: 370px; 
+	height: 470px; 
 	background-size: cover;
 	background-position: 50% 50%;
 	border-bottom-color: rgb(57, 57, 57);
 	border-bottom-width: 5px;
 	border-style: solid;
+
 }
+
 
 #short-details {
 	display: block;
+	margin-top: -4px;
 	font-size: 1.5em;
 	font-weight: 400;
 	font-family: Raleway, sans-serif;

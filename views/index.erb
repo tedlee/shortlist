@@ -21,11 +21,12 @@
 						<div class="short-number"> <%= count %>)</div>
 						<div class="short-title"><%= link.title %> — </div>
 						<a href="<%= link.url %>">Link</a>
+						<a href="#" class="fav-button">↑ <%= link.favourites %></a>
 						<div class="short-author">[via <a href="/<%= link.user_username %>"><%= link.user_username %> </a>]</div>
 					</div>
 				</div> 
 				<% count+=1 %>
-				<% break if count==20 %>
+				<% break if count==21 %>
 		<% end %>
 	<% end %>
 	<div id="add-bar" class="short-title" style="font-weight: 200">

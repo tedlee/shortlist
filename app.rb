@@ -36,6 +36,7 @@ class Link
 	property :id,			Serial
 	property :url,			String, :length => 500, required: true
 	property :title,		String, :length => 120, required: true
+	property :favourites,	Integer, required: false, default: 1
 	#property :description,	String, :length => 120
 	property :created_at, 	DateTime
 

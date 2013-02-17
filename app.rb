@@ -16,7 +16,7 @@ class User
 	# This might because of the number of arguments that are passed in at POST /:signup
 
 	#property :id, 			Serial
-	property :username,		String, required: true, :key => true
+	property :username,		String, required: true, unique: true, :key => true
 	property :firstname, 	String, required: true
 	property :lastname, 	String, required: true
 	#property :email, 		String, format: :email_address  

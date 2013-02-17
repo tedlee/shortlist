@@ -1,5 +1,7 @@
 require "sinatra"
 require "data_mapper"
+require "warden"
+require 'dm-types'
 
 configure :production do
 	require 'newrelic_rpm'
@@ -17,6 +19,7 @@ class User
 
 	#property :id, 			Serial
 	property :username,		String, required: true, unique: true, :key => true
+	property :password,		BCryptHash
 	property :firstname, 	String, required: true
 	property :lastname, 	String, required: true
 	#property :email, 		String, format: :email_address  
@@ -25,6 +28,16 @@ class User
 
 	def username= new_username
 		super new_username.downcase
+	end
+
+	def self.authenticate(username, password)
+		user = first(:username => username)
+		if user 
+			if user.password != password
+				user = nill
+			end
+		end
+		user
 	end
 
 	has n, :links
@@ -61,6 +74,43 @@ configure :production do
 	
 end
 
+use Rack::Session::Cookie, :secret => "4169671111"
+
+use Warden::Manager do |manager|
+	manager.default_strategies :password
+	manager.failure_app = FailureApp.new
+end
+
+Warden::Manager.serialize_into_session do |user|
+	puts '[INFO] serialize into session'
+	user.username
+end
+
+Warden::Manager.serialize_from_session do |username|
+	puts '[INFO] serialize from session'
+	User.get(username)
+end
+
+Warden::Strategies.add(:password) do
+	def valid?
+		puts '[INFO] password strategy valid?'
+		params['username'] || params['password']
+	end
+
+	def authenticate!
+		puts '[INFO] password strategy authenticate'
+		u = User.authenticate(params['username'], params['password'])
+		u.nil? ? fail!('Could not login in') : success!(u)
+	end
+end
+
+class FailureApp
+	def call(env)
+		uri = env['REQUEST_URI']
+		puts "failure #{env['REQUEST_METHOD']} #{uri}"
+	end
+end
+
 get "/" do
 	@title = "Shortlist"
 	#@user_count = User.all().count.to_s()
@@ -75,15 +125,33 @@ get "/signup" do
 	erb :signup
 end
 
+post "/signup" do
+	
+	User.create(:username => params[:username], :password => params[:password], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
+	redirect params[:username]
+end
+
+get "/login/?" do
+	@title = "Shortlist - Login"
+	erb :login
+end
+
+post "/login/?" do
+	if env['warden'].authenticate
+		redirect "/#{env['warden'].user.username}"
+	else
+		redirect '/login'
+	end
+end
+
+get "/logout/?" do
+	env['warden'].logout
+	redirect '/'
+end
+
 get "/changelog" do
 	@title = "Shortlist - Signup"
 	erb :changelog
-end
-
-post "/signup" do
-	
-	User.create(:username => params[:username], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
-	redirect params[:username]
 end
 
 post "/:username/add" do

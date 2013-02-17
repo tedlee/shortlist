@@ -32,6 +32,10 @@
 		<ul>
 			<li><a href="/changelog">Changelog</a></li>
 			<li><a href="/">Shortlist Home</a></li>
+			<% if env['warden'].authenticate %>
+				<li><a href="/<%= "#{env['warden'].user.username}" %>">My Shortlist</a></li>
+				<li><a href="/logout">Sign Out of <%= "#{env['warden'].user.username}" %></a></li>
+			<% end %>
 		</ul>
 	</div>
 

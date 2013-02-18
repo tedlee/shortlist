@@ -9,8 +9,8 @@
 	<script type="text/javascript" src="../scripts/main.js"></script>
 	<script type="text/javascript" src="../scripts/moment.min.js"></script>
 	<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Raleway:100,200,400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,700' rel='stylesheet' type='text/css'>
 
 
 	<title><%= @title %></title> 
@@ -23,6 +23,17 @@
 
 	<div id="wrap">
 		<div id="main">
+			<div id="navbar">
+				<div id="inner-navbar">
+					<% if env['warden'].authenticate %>
+						<!-- When user is signed out -->
+					<% else %>
+						<!-- When user is signed in -->
+						<div class="left-logo"><a href="/">Shortlist</a></div>
+						<div class="right-button"><a href="/login">Login</a></div>
+					<% end %>
+				</div>
+			</div>
 			<%= yield %>
 		</div>
 	</div>

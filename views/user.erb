@@ -31,11 +31,15 @@
 		<% end %>
 	<% end %>
 	<div id="add-bar">
-		<form action="/<%= @user.username %>/add" method="post">
-			<input type="text" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
-			<input type="text" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
-			<input type="submit" class="link-input link-button" value="Add Link">
-		</form>
+		<% if (env['warden'].authenticate) && (@user.username == env['warden'].user.username) %>
+			<% puts env['warden'].user.username %>
+			<% puts @user.username %>
+			<form action="/<%= @user.username %>/add" method="post">
+				<input type="text" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
+				<input type="text" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
+				<input type="submit" class="link-input link-button" value="Add Link">
+			</form>
+		<% end %>
 	</div>
 </div>
 

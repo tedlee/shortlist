@@ -158,14 +158,18 @@ post "/:username/add" do
 
 	puts "username submitted is: #{@user.username}"
 
-	if @user
+	# Checks to make sure that person is signed in before submitting link
+	if (@user && env['warden'].authenticate) && @user.username == env['warden'].user.username
 		Link.create(:url => params[:url], :title => params[:title], :user_username => @user.username, :created_at => Time.now)
+		redirect back
+	else
 		redirect back
 	end
 end
 
 get "/:username" do
 	@user = User.get params[:username]
+
 	#@links = Link.all(:user_username => @user.username)
 
 	# To get all the links from a user do @user.links.all()

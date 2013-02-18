@@ -34,7 +34,7 @@ class User
 		user = first(:username => username)
 		if user 
 			if user.password != password
-				user = nill
+				user = nil
 			end
 		end
 		user
@@ -62,7 +62,6 @@ configure :development do
 	DataMapper.auto_upgrade!
 	#DataMapper.auto_migrate! # wipes everything
 	DataMapper.finalize
-	
 end 
 
 configure :production do
@@ -74,7 +73,7 @@ configure :production do
 	
 end
 
-use Rack::Session::Cookie, :secret => "4169671111"
+use Rack::Session::Cookie, :secret => ENV['WARDEN_SESSION_SECRET']
 
 use Warden::Manager do |manager|
 	manager.default_strategies :password

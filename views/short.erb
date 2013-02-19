@@ -1,0 +1,36 @@
+
+<div id="hero" style="background-image:url('../images/nyc-park-bg.jpg')">
+	<!-- <img src='../images/ted.jpg' class="avatar"> -->
+	<img src="<%= @user.user_avatar %>" class="avatar">
+	<div class="hero-marker"></div> 
+</div>
+
+<div id="shorts">
+	<div id="time-bar"> <div class="current-date"><%= @link.created_at %></div> </div>
+
+	<% if @user.links %>
+		<div class="short-container">
+			<% if %w[.png .jpg .gif .bmp].include? File.extname(@link.url) %>
+				<div class="short-cover" style="background-image:url('<%= @link.url %>')"></div>
+			<% elsif %w[www.youtube.com].include? URI.parse(@link.url).host %>
+				<%= youtube_embed(@link.url) %>
+
+			<% else %>
+				<div class="short-cover" style="background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')"> </div>
+			<% end %>
+			<div id="short-details">
+				<div class="short-title"><a href="/<%= link.user_username %>/<%= link.id %>"> <%= link.title %> </a></div>
+				<div class="short-link"><a href="<%= link.url %>">Link</a></div>
+				<!-- <div class="short-fav"><a href="#" class="fav-button">★ <%= link.favourites %></a></div> -->
+				<div class="short-author">[via <a href="/<%= link.user_username %>"><%= link.user_username %></a>]</div>
+			</div>
+		</div> 
+	<% end %>
+
+	<div id="add-bar">
+		<!-- As of right now I don't see a good reason to have the addbar on cononical Short links -->
+	</div>
+</div>
+
+
+

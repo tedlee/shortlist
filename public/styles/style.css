@@ -137,6 +137,9 @@ html, body {
 	box-shadow: 0 2px 6px #777;
 	*/	
 
+	border-color: rgb(57, 57, 57);
+	border-bottom-width: 1px;
+	border-style: solid;
 
 	background-image: url(../images/time-bar.jpg);
 	background-position: 0px -1px;
@@ -191,40 +194,36 @@ html, body {
 	background-size: cover;
 	background-position: 50% 50%;
 	border-bottom-color: rgb(57, 57, 57);
-	border-bottom-width: 5px;
+	border-bottom-width: 1px;
 	border-style: solid;
 
 }
 
-
 #short-details {
 	display: block;
-	margin-top: -4px;
 	font-size: 1.1em;
 	font-weight: 400;
 	font-family: Raleway, sans-serif;
 	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-bottom: 35px;
 	border-color: rgb(57, 57, 57);
-	border-left-width: 1px;
-	border-right-width: 1px;
 	border-bottom-width: 5px;
 	border-style: solid;
 	height: 100%;
 	padding-left: 5px;
 }
 
-#short-details a {
-	text-decoration: none;
-	display: inline-block;
-	font-weight: 700;
-	color: rgb(78, 103, 165);
-}
-
 .short-author {
 	display: inline-block;
 	float: right;
 	margin-right: 10px;
+}
+
+.short-author a{
+	display: inline-block;
+	color: rgb(78, 103, 165);
+	font-weight: 700;
+	text-decoration: none;
 }
 
 .short-number {
@@ -235,9 +234,38 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-.short-title {
+.short-title a{
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
+	text-decoration: none;
+	color: black;
+}
+
+.short-title a:hover{
+	text-decoration: underline;
+}
+
+.short-link a{
+	text-decoration: none;
+	float: left;
+	margin-left: 10px;
+	display: inline-block;
+	font-weight: 700;
+	color: rgb(78, 103, 165);
+}
+
+.short-link a:hover{
+	text-decoration: underline;
+}
+
+.short-fav a{
+	text-decoration: none;
 	display: inline-block;
 	margin-left: 10px;
+	float: left;
+	font-weight: 700;
+	color: rgb(78, 103, 165);
 }
 
 .link-input {

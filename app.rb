@@ -121,14 +121,12 @@ end
 
 get "/signup" do
 	@users = User.all(:order => :username.desc)
-	#set :erb, :layout => false
 	erb :signup
 end
 
 post "/signup" do
-	#@user = User.get params[:username]
 	User.create(:username => params[:username], :password => params[:password], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
-	#redirect params[:username]
+
 	if env['warden'].authenticate
 		redirect "/#{env['warden'].user.username}"
 	else
@@ -185,6 +183,22 @@ get "/:username" do
 		erb :user
 	else
 		"That user doesn't exist yet :("
+	end
+end
+
+get "/:username/:id" do
+	@user = User.get params[:username]
+	@link = @user.links.get params[:id]
+
+	#@links = Link.all(:user_username => @user.username)
+
+	# To get all the links from a user do @user.links.all()
+
+	if @user && @link
+		@title = "The Shortlist of #{@user.username}"
+		erb :short
+	else
+		"That Short doesn't exist :("
 	end
 end
 

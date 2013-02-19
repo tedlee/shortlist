@@ -1,5 +1,13 @@
 $(document).ready(function () {
-	$(".current-date").append(moment().format('dddd MMMM Do YYYY'))
+	uglyDate = $(".current-date").text()
+	if (uglyDate != ""){
+		$(".current-date").empty()
+		$(".current-date").append("Submitted: " + moment(uglyDate).format('dddd MMMM Do YYYY'))
+	}
+	else {
+		$(".current-date").append(moment().format('dddd MMMM Do YYYY'))
+	}
+	
 });
 
 // On Button click

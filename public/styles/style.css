@@ -59,6 +59,7 @@ html, body {
 	height: 70px;
 	margin-right: auto;
 	margin-left: auto;
+
 	/* Neat little trick to vertically align text
 	set line-height to the parents height */
 	line-height: 70px;
@@ -66,9 +67,9 @@ html, body {
 
 .left-logo a{
 	float: left;
-	margin-left: 10px;
 	font-size: 1.5em;
 	font-weight: 800;
+	width: 110px;
 	color: #0274B0;
 	text-decoration: none;
 }
@@ -87,7 +88,7 @@ html, body {
 	margin-left: auto;
 	margin-top: 45px;
 	width: 85%;
-	min-width: 480px;
+	min-width: 300px;
 }
 
 .title {
@@ -320,6 +321,34 @@ html, body {
 	height: 150px; /* padding-top is added to this */
 	background-size: cover;
 	background-position: 50% 50%;
+}
+
+.nav-avatar {
+	max-width: 70px;
+	max-height: 70px;
+	display: block;
+	position: absolute;
+	left: 50%;
+	right: 50%;
+	/* margin-left set to half the width of the object */
+	margin-left: -35px;
+	box-shadow: 0 0 0 1px #050505, 0 0 3px #918282;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.center {
+   width: 300px;
+   height: 300px;
+   position: absolute;
+   left: 50%;
+   top: 50%; 
+   margin-left: -150px;
+   margin-top: -150px;
+}
+
+.nav-avatar:hover {
+	box-shadow: 0 0 0 2px #0274B0, 0 0 3px #706c6c;
 }
 
 .avatar {

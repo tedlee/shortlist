@@ -23,18 +23,25 @@
 
 	<div id="wrap">
 		<div id="main">
-			<div id="navbar">
-				<div id="inner-navbar">
-					<% if env['warden'].authenticate %>
-						<div class="left-logo"><a href="/">Shortlist</a></div>
-						<div class="right-button"><a href="/logout">Logout</a></div>
-					<% else %>
+			<% if env['warden'].authenticate %>
+				<div id="navbar" style="height: 50px;">
+					<div id="inner-navbar" style="height: 50px; line-height: 50px;">
 						<!-- When user is signed in -->
 						<div class="left-logo"><a href="/">Shortlist</a></div>
-						<div class="right-button"><a href="/login">Login</a></div>
-					<% end %>
+						<a href="/<%= env['warden'].user.username %>"><img src="<%= User.get(env['warden'].user.username).user_avatar %>" class="nav-avatar"></a>
+						<div class="right-button"><a href="/logout">Logout</a></div>
+					</div>
 				</div>
-			</div>
+			<% else %>
+				<div id="navbar">
+					<div id="inner-navbar">
+						<!-- When user is signed out -->
+						<div class="left-logo"><a href="/">Shortlist</a></div>
+						<div class="right-button"><a href="/login">Login</a></div>
+					</div>
+				</div>
+			<% end %>
+			
 			<%= yield %>
 		</div>
 	</div>
@@ -45,10 +52,10 @@
 			<li><a href="/changelog">Changelog</a></li>
 			<li><a href="/">Shortlist Home</a></li>
 			<% if env['warden'].authenticate %>
-				<li><a href="/<%= "#{env['warden'].user.username}" %>">My Shortlist</a></li>
-				<li><a href="/logout">Sign Out of <%= "#{env['warden'].user.username}" %></a></li>
+				<li><a href="/<%= env['warden'].user.username %>">My Shortlist</a></li>
+				<li><a href="/logout">Logout</a></li>
 			<% else %>
-				<li><a href="/login">Login</a></li>
+				<li><a href="/signup">Sign Up</a></li>
 			<% end %>
 		</ul>
 	</div>

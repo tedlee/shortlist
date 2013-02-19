@@ -128,7 +128,12 @@ end
 post "/signup" do
 	#@user = User.get params[:username]
 	User.create(:username => params[:username], :password => params[:password], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
-	redirect params[:username]
+	#redirect params[:username]
+	if env['warden'].authenticate
+		redirect "/#{env['warden'].user.username}"
+	else
+		redirect '/login'
+	end
 end
 
 get "/login/?" do

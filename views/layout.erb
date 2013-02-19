@@ -26,7 +26,8 @@
 			<div id="navbar">
 				<div id="inner-navbar">
 					<% if env['warden'].authenticate %>
-						<!-- When user is signed out -->
+						<div class="left-logo"><a href="/">Shortlist</a></div>
+						<div class="right-button"><a href="/logout">Logout</a></div>
 					<% else %>
 						<!-- When user is signed in -->
 						<div class="left-logo"><a href="/">Shortlist</a></div>

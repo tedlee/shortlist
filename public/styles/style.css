@@ -67,7 +67,7 @@ html, body {
 	font-size: 1.5em;
 	font-weight: 800;
 	margin-top: 20px;
-	color: black;
+	color: #0274B0;
 	text-decoration: none;
 }
 
@@ -113,6 +113,7 @@ html, body {
 	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
 	text-align: center;
 	padding: 15px;
+	background-color: white;
 }
 
 #time-bar {
@@ -228,7 +229,8 @@ html, body {
 	display: inline-block;
 	float: left;
 	margin-left: 15px;
-	font-weight: 700;
+	font-weight: 800;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .short-title {

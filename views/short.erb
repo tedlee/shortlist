@@ -19,10 +19,10 @@
 				<div class="short-cover" style="background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')"> </div>
 			<% end %>
 			<div id="short-details">
-				<div class="short-title"><a href="/<%= link.user_username %>/<%= link.id %>"> <%= link.title %> </a></div>
-				<div class="short-link"><a href="<%= link.url %>">Link</a></div>
-				<!-- <div class="short-fav"><a href="#" class="fav-button">★ <%= link.favourites %></a></div> -->
-				<div class="short-author">[via <a href="/<%= link.user_username %>"><%= link.user_username %></a>]</div>
+				<div class="short-title"><a href="/<%= @link.user_username %>/<%= @link.id %>"> <%= @link.title %> </a></div>
+				<div class="short-link"><a href="<%= @link.url %>">Link</a></div>
+				<!-- <div class="short-fav"><a href="#" class="fav-button">★ <%= @link.favourites %></a></div> -->
+				<div class="short-author">[via <a href="/<%= @link.user_username %>"><%= @link.user_username %></a>]</div>
 			</div>
 		</div> 
 	<% end %>

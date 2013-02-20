@@ -11,7 +11,8 @@
 						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
 					<% elsif %w[www.youtube.com].include? URI.parse(link.url).host %>
 						<%= youtube_embed(link.url) %>
-
+					<% elsif %w[vimeo.com].include? URI.parse(link.url).host %>
+						<%= vimeo_embed(link.url) %>
 					<% else %>
 						<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 					<% end %>

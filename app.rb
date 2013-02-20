@@ -239,5 +239,14 @@ def youtube_embed(youtube_url)
 	youtube_url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/]
 	youtube_id = $5
 
-	%Q{<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>}
+	# http://www.youtube.com/embed/v1uyQZNg2vE?autoplay=0&controls=0&showinfo=0&autohide=1&loop=0&rel=0&wmode=transparent&enablejsapi=1&modestbranding=1&html5=1
+	%Q{<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/#{ youtube_id }?autoplay=0&iv_load_policy=3&rel=0&theme=light&color=white&controls=2&showinfo=0&autohide=1&loop=0&wmode=transparent&modestbranding=1&html5=1" ></iframe>}
+end
+
+def vimeo_embed(vimeo_url)
+
+	vimeo_url.gsub(/https?:\/\/(www.)?vimeo\.com\/([A-Za-z0-9._%-]*)((\?|#)\S+)?/) do
+		vimeo_id = $2
+		%Q{<iframe src="//player.vimeo.com/video/#{vimeo_id}?portrait=0&color=EB5858" width="100%" height="550" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>}
+	end
 end

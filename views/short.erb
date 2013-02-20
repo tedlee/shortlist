@@ -14,7 +14,8 @@
 				<div class="short-cover" style="background-image:url('<%= @link.url %>')"></div>
 			<% elsif %w[www.youtube.com].include? URI.parse(@link.url).host %>
 				<%= youtube_embed(@link.url) %>
-
+			<% elsif %w[vimeo.com].include? URI.parse(@link.url).host %>
+				<%= vimeo_embed(@link.url) %>
 			<% else %>
 				<div class="short-cover" style="background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')"> </div>
 			<% end %>

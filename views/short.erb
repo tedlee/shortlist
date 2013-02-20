@@ -28,7 +28,15 @@
 	<% end %>
 
 	<div id="add-bar">
-		<!-- As of right now I don't see a good reason to have the addbar on cononical Short links -->
+		<% if (env['warden'].authenticate) && (@user.username == env['warden'].user.username) %>
+			<% puts env['warden'].user.username %>
+			<% puts @user.username %>
+			<form action="/<%= @user.username %>/edit/<%= @link.id %>" method="post">
+				<input type="text" class="link-input" name="url" value="<%= @link.url %>" autocomplete="off"/>
+				<input type="text" class="link-input" name="title" value="<%= @link.title %>" autocomplete="off"/>
+				<input type="submit" class="link-input link-button" value="Confirm Edit">
+			</form>
+		<% end %>
 	</div>
 </div>
 

@@ -202,6 +202,19 @@ get "/:username/:id" do
 	end
 end
 
+post "/:username/edit/:id" do
+	@user = User.get params[:username]
+	@link = @user.links.get params[:id]
+
+	if (env['warden'].authenticate) && (@user.username == env['warden'].user.username)
+		if @link.update(:url => params[:url], :title => params[:title])
+			redirect back
+		else
+			redirect back
+		end
+	end
+end
+
 not_found do  
 	halt 404, 'No page for you.'  
 end

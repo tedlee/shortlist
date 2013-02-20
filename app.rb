@@ -215,6 +215,19 @@ post "/:username/edit/:id" do
 	end
 end
 
+post "/:username/delete/:id" do
+	@user = User.get params[:username]
+	@link = @user.links.get params[:id]
+
+	if (env['warden'].authenticate) && (@user.username == env['warden'].user.username)
+		if @link.destroy
+			redirect "/#{ @user.username }"
+		else
+			redirect "/#{ @user.username }"
+		end
+	end
+end
+
 not_found do  
 	halt 404, 'No page for you.'  
 end

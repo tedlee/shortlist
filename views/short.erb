@@ -36,6 +36,9 @@
 				<input type="text" class="link-input" name="title" value="<%= @link.title %>" autocomplete="off"/>
 				<input type="submit" class="link-input link-button" value="Confirm Edit">
 			</form>
+			<form action="/<%= @user.username %>/delete/<%= @link.id %>" method="post">
+				<input type="submit" class="link-input link-button" value="Remove Short">
+			</form>
 		<% end %>
 	</div>
 </div>

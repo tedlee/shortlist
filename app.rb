@@ -250,3 +250,28 @@ def vimeo_embed(vimeo_url)
 		%Q{<iframe src="//player.vimeo.com/video/#{vimeo_id}?portrait=0&color=EB5858" width="100%" height="550" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>}
 	end
 end
+
+def soundcloud_embed(soundcloud_url)
+
+	require 'uri'
+	require 'net/http'
+	require 'json'
+
+	soundcloud_url.gsub(/(https?:\/\/)?(www.)?soundcloud\.com\/.*/) do |match|
+	  new_uri = match.to_s
+	  new_uri = (new_uri =~ /^https?\:\/\/.*/) ? URI(new_uri) : URI("http://#{new_uri}")
+	  new_uri.normalize!
+
+	  uri = URI("http://soundcloud.com/oembed")
+	  params = {:format => 'json', :url => new_uri}.merge(:maxwidth => '', :maxheight => '500', :auto_play => false, :show_comments => false)
+	  uri.query = params.collect { |k,v| "#{k}=#{URI.escape(v.to_s)}" }.join('&')
+
+	  response = Net::HTTP.get(uri)
+
+	  if response != nil
+	    JSON.parse(response)["html"]
+	  else
+	    match
+	  end
+	end
+end

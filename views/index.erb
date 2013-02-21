@@ -13,6 +13,8 @@
 						<%= youtube_embed(link.url) %>
 					<% elsif %w[vimeo.com].include? URI.parse(link.url).host %>
 						<%= vimeo_embed(link.url) %>
+					<% elsif %w[soundcloud.com].include? URI.parse(link.url).host %>
+						<%= soundcloud_embed(link.url) %>
 					<% else %>
 						<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 					<% end %>
@@ -25,7 +27,7 @@
 					</div>
 				</div> 
 				<% count+=1 %>
-				<% break if count==21 %>
+				<% break if count==11 %>
 		<% end %>
 	<% end %>
 	<div id="add-bar" class="short-title" style="font-weight: 400">

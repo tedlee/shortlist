@@ -9,7 +9,7 @@
 				<div class="short-container">
 					<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
 						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
-					<% elsif %w[www.youtube.com].include? URI.parse(link.url).host %>
+					<% elsif %w[youtube.com].include? URI.parse(link.url).host %>
 						<%= youtube_embed(link.url) %>
 					<% elsif %w[vimeo.com].include? URI.parse(link.url).host %>
 						<%= vimeo_embed(link.url) %>

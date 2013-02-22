@@ -352,6 +352,33 @@ html, body {
 	background-position: 50% 50%;
 }
 
+#login-box {
+	-webkit-box-shadow: 0 2px 4px #777;
+	-moz-box-shadow: 0 2px 4px #777;
+	box-shadow: 0 2px 4px #777;
+	background: #fff;
+	border-radius: 6px;
+	left: 50%;
+	margin: 0px 0px 0px -125px;
+	opacity: 1;
+	position: absolute;
+	text-align: center;
+	width: 250px;
+	height: 280px;
+}
+
+#login-avatar {
+	border-radius: 6px 6px 0 0;
+	display: block;
+	height: 170px;
+
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')
+}
+
 .nav-avatar {
 	max-width: 70px;
 	max-height: 70px;

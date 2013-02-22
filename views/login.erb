@@ -1,11 +1,39 @@
-<div class="title"> Shortlist </div>
+<div class="title"> Welcome back! </div>
 
 <div class="hero-marker"></div>
 
-<div id="signup-box">
+
+
+<div id="login-box">
+	<div id="login-avatar" alt="User Avatar"> </div>
 	<form action="/login" method="post">
 		<input type="text" class="link-input" name="username" placeholder="Username"/>
 		<input type="password" class="link-input" name="password" placeholder="Password"/>
 		<input type="submit" class="link-input link-button" value="Login">
 	</form>
 </div>
+
+<script>
+
+function makeRequest(username) {
+
+	var requestURL = "/api/" + username + "/avatar";
+	$.getJSON(requestURL, function(data){
+		if (data.avatar_url != false){
+			$('#login-avatar').css("background-image", 'url(' + data.avatar_url + ')');
+		}
+		else {
+			$('#login-avatar').css("background-image", 'url(http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg)');
+		};
+	})
+
+}
+
+$('input[name="username"]').keyup(function() {
+	if ($(this).val() != "") {
+		var username = $(this).val();
+		makeRequest(username)
+	};
+});
+
+</script>

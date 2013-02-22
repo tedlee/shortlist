@@ -15,25 +15,32 @@
 
 <script>
 
-function makeRequest(username) {
-
-	var requestURL = "/api/" + username + "/avatar";
-	$.getJSON(requestURL, function(data){
-		if (data.avatar_url != false){
-			$('#login-avatar').css("background-image", 'url(' + data.avatar_url + ')');
-		}
-		else {
-			$('#login-avatar').css("background-image", 'url(http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg)');
+function checkUsername(username, data) {
+	$.each(data.avatars, function(i,avatar){
+		if (username == avatar.username){
+			$('#login-avatar').css("background-image", 'url(' + avatar.avatar_url + ')');
 		};
-	})
-
+	});
 }
 
-$('input[name="username"]').keyup(function() {
-	if ($(this).val() != "") {
-		var username = $(this).val();
-		makeRequest(username)
-	};
-});
+function getAvatarList() {
+
+	var requestURL = "/api/avatars";
+	$.getJSON(requestURL, function(data){
+		if (data.avatars != false){
+
+			$('input[name="username"]').keyup(function() {
+				if ($(this).val() != "") {
+					var username = $(this).val();
+					checkUsername(username, data);
+				};
+			});
+		}
+	})
+}
+
+getAvatarList();
 
 </script>
+
+

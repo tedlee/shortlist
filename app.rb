@@ -3,6 +3,7 @@ require "data_mapper"
 require "warden"
 require 'dm-types'
 require "sinatra/contrib"
+require "jsonify"
 
 configure :production do
 	require 'newrelic_rpm'
@@ -187,6 +188,26 @@ get "/:username" do
 	end
 end
 
+get "/api/avatars" do
+	@user = User.all
+
+	if @user
+	    # JSON reponse containing all user moments
+
+	    content_type :json
+	    response = Jsonify::Builder.new(:format => :pretty)
+	    response.avatars(@user) do |user|
+	    	response.username user.username
+	        response.avatar_url user.user_avatar
+	    end
+
+	    response.compile!
+	else
+	    json "avatars" => false
+	end
+
+end
+
 get "/:username/:id" do
 	@user = User.get params[:username]
 	@link = @user.links.get params[:id]
@@ -200,17 +221,6 @@ get "/:username/:id" do
 		erb :short
 	else
 		"That Short doesn't exist :("
-	end
-end
-
-get "/api/:username/avatar" do
-	@user = User.get params[:username].downcase
-
-	if @user
-		avatar_url = @user.user_avatar
-		json "avatar_url" => avatar_url
-	else
-		json "avatar_url" => false
 	end
 end
 

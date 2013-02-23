@@ -31,7 +31,7 @@
 	<% end %>
 
 	<div id="add-bar">
-		<% if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || (ENV['ADMIN_USERNAME'] == env['warden'].user.username) %>
+		<% if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username)) %>
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>
 			<form action="/<%= @user.username %>/edit/<%= @link.id %>" method="post">

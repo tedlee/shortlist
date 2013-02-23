@@ -162,6 +162,7 @@ html, body {
 
 #add-bar {
 	width: 100%;
+	min-width: 10px;
 	margin-right: auto;
 	margin-left: auto;
 	text-align: center;

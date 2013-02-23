@@ -159,6 +159,11 @@ get "/changelog" do
 	erb :changelog
 end
 
+get "/about" do
+	@title = "Shortlist - About"
+	erb :about
+end
+
 post "/:username/add" do
 	@user = User.get params[:username]
 

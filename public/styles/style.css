@@ -427,6 +427,63 @@ html, body {
 	background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')
 }
 
+#about-box {
+	-webkit-box-shadow: 0 2px 4px #777;
+	-moz-box-shadow: 0 2px 4px #777;
+	box-shadow: 0 2px 4px #777;
+	background: #fff;
+	border-radius: 10px;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	opacity: 1;
+	width: 80%;
+	height: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#about-cover {
+	border-radius: 6px 6px 0 0;
+	display: block;
+	height: 400px;
+	margin-bottom: 5px;
+
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')
+}
+
+#about-text {
+	margin: 20px;
+	line-height: 1.5em;
+	font-size: 22px;
+	font-weight: 300;
+}
+
+#about-text h2{
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	font-size: 30px;
+}
+
+#about-text span{
+	font-weight: 600;
+}
+
+#about-cover h1{
+	padding: 20px;
+	text-align: left;
+	color: white;
+	font-weight: 800;
+	font-size: 40px;
+}
+
 .nav-avatar {
 	max-width: 70px;
 	max-height: 70px;

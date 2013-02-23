@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="../scripts/moment.min.js"></script>
 	<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Raleway:100,200,400,700' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,600,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300,600,700' rel='stylesheet' type='text/css'>
 
 
 	<title><%= @title %></title> 
@@ -51,6 +51,7 @@
 		<ul>
 			<li><a href="/changelog">Changelog</a></li>
 			<li><a href="/">Shortlist Home</a></li>
+			<li><a href="/about">About</a></li>
 			<% if env['warden'].authenticate %>
 				<li><a href="/<%= env['warden'].user.username %>">My Shortlist</a></li>
 				<li><a href="/logout">Logout</a></li>

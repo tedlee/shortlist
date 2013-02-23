@@ -233,7 +233,7 @@ post "/:username/edit/:id" do
 	@user = User.get params[:username]
 	@link = @user.links.get params[:id]
 
-	if (env['warden'].authenticate) && (@user.username == env['warden'].user.username)
+	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
 		if @link.update(:url => params[:url], :title => params[:title])
 			redirect back
 		else
@@ -246,7 +246,7 @@ post "/:username/delete/:id" do
 	@user = User.get params[:username]
 	@link = @user.links.get params[:id]
 
-	if (env['warden'].authenticate) && (@user.username == env['warden'].user.username)
+	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
 		if @link.destroy
 			redirect "/#{ @user.username }"
 		else

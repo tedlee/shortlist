@@ -2,6 +2,24 @@
 
 	<div class="log-entry">
 		<div class="log-date">
+			February 22nd 2013
+		</div>
+		<div class="log-description">
+			Did a bunch of UI clean-up on the input boxes and buttons. It's getting better but is still going to require some tickering.
+		</div>
+	</div>
+
+	<div class="log-entry">
+		<div class="log-date">
+			February 21st 2013
+		</div>
+		<div class="log-description">
+			Implemented a feature that pops-up a users avatar as they login with their username. Initially I wrote an API that was pinged every keystroke but I quickly realized that this was much more expensive than was actually needed. Instead, on loading '/login' a rejest is made for a JSON document that contains all usernames and their associated avatar URLs. Then as a user types I check against that list. One server hit instead number of keystrokes. Much more efficient. 
+		</div>
+	</div>
+
+	<div class="log-entry">
+		<div class="log-date">
 			February 20th 2013
 		</div>
 		<div class="log-description">

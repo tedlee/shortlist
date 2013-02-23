@@ -452,7 +452,7 @@ html, body {
 }
 
 .nav-avatar:hover {
-	box-shadow: 0 0 0 2px #0274B0, 0 0 3px #706c6c;
+	box-shadow: 0 0 0 2px #050505, 0 0 10px #918282;
 }
 
 .avatar {

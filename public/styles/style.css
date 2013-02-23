@@ -108,7 +108,7 @@ html, body {
 
 #signup-box {
 	width: 250px;
-	height: 180px;
+	height: 250px;
 	margin-right: auto;
 	margin-left: auto;
 	display: block;
@@ -269,30 +269,64 @@ html, body {
 	color: rgb(78, 103, 165);
 }
 
+.button {
+
+	background: #fff;
+	color: #EB5858;
+	border: 2px solid #EB5858;
+
+	margin-top: 15px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	display: block;
+	font-size: 1.00em;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border-radius: 3px;
+	font-family: 'Open Sans', sans-serif;
+	display: inline-block;
+	width: 240px;
+}
+
+.button:hover {
+	background-color: #EB5858;
+	color: #fff;
+}
+
+.button {
+	-webkit-transition: color .25s, background .25s, opacity .25s;
+	-moz-transition: color .25s, background .25s, opacity .25s;
+	-ms-transition: color .25s, background .25s, opacity .25s;
+	-o-transition: color .25s, background .25s, opacity .25s;
+	transition: color .25s, background .25s, opacity .25s;
+}
+
 .link-input {
-	border: 3px solid rgb(30, 28, 28);
-	border: 3px solid rgba(30, 28, 28, 0.05);
+
+	border: 1px solid #050505;
+	margin-top: 10px;
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
 	outline: none;
-	font-size: 1em;
-	font-weight: bold;
-	display: block;
+	font-size: 1.00em;
 	width: 220px;
 	background-color: #ffffff;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 	color: #383838;
 	padding: 2px 8px;
 	text-decoration: none;
 	display: inline-block;
+	font-family: 'Open Sans', sans-serif;
+	letter-spacing: 1px;
+	vertical-align: middle;
 }
 
 .link-input:focus {
 	outline:none;
-	border-color:#9ecaed;
-	box-shadow:0 0 10px #9ecaed;
+	box-shadow:inset 0 0 0px 1px #050505;
 }
 
 .link-button:hover{
@@ -357,20 +391,21 @@ html, body {
 	-moz-box-shadow: 0 2px 4px #777;
 	box-shadow: 0 2px 4px #777;
 	background: #fff;
-	border-radius: 6px;
+	border-radius: 10px;
 	left: 50%;
-	margin: 0px 0px 0px -125px;
+	margin: 0px 0px 0px -150px;
 	opacity: 1;
 	position: absolute;
 	text-align: center;
-	width: 250px;
-	height: 280px;
+	width: 300px;
+	height: 370px;
 }
 
 #login-avatar {
 	border-radius: 6px 6px 0 0;
 	display: block;
-	height: 170px;
+	height: 220px;
+	margin-bottom: 5px;
 
 	width: 100%;
 	background-repeat: no-repeat;

@@ -27,7 +27,7 @@
 				<div id="navbar" style="height: 50px;">
 					<div id="inner-navbar" style="height: 50px; line-height: 50px;">
 						<!-- When user is signed in -->
-						<div class="left-logo"><a href="/">Shortlist</a></div>
+						<div class="left-logo animate-title"><a href="/">Shortlist</a></div>
 						<a href="/<%= env['warden'].user.username %>"><img src="<%= User.get(env['warden'].user.username).user_avatar %>" class="nav-avatar"></a>
 						<div class="right-button"><a href="/logout">Logout</a></div>
 					</div>
@@ -38,6 +38,7 @@
 						<!-- When user is signed out -->
 						<div class="left-logo"><a href="/">Shortlist</a></div>
 						<div class="right-button"><a href="/login">Login</a></div>
+						<div class="right-button"><a href="/signup">Sign Up</a></div>
 					</div>
 				</div>
 			<% end %>

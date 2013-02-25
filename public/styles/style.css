@@ -73,8 +73,6 @@ html, body {
 	/* color: #0274B0; BLUE*/
 	color: #EB5858;
 	text-decoration: none;
-	-webkit-animation: fadeIn 1.00s ease;
-	-moz-animation: fadeIn 1.00s ease;
 }
 
 .animate-avatar {
@@ -108,13 +106,22 @@ html, body {
 	}
 }
 
+.animate-title, .left-logo a {
+	-webkit-animation: fadeIn 1.00s ease;
+	-moz-animation: fadeIn 1.00s ease;
+}
+
 .right-button a{
 	float: right;
-	margin-right: 10px;
-	color: black;
+	margin-right: 30px;
+	color: #656262;
 	font-size: 1.5em;
 	font-weight: 500;
 	text-decoration: none;
+}
+
+.right-button a:hover{
+	color: #EB5858;
 }
 
 #shorts {
@@ -128,16 +135,15 @@ html, body {
 .title {
 	margin-right: auto;
 	margin-left: auto;
-	width: 200px;
 	text-align: center;
 	display: block;
-	margin-top: 40px;
 	margin-bottom: 5px;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 2em;
+	font-size: 4em;
 	font-weight: 800;
-	text-shadow: 0px 0px 0 #656262;
-	color: black;
+	color: #FFF;
+	letter-spacing: 1px;
+	text-shadow: 0px 1px 0.1em #000000;
 }
 
 #signup-box {
@@ -452,7 +458,8 @@ html, body {
 	background: #fff;
 	border-radius: 10px;
 	left: 50%;
-	margin: 0px 0px 0px -150px;
+	top: 50%;
+	margin: -185px 0px 0px -150px;
 	opacity: 1;
 	position: absolute;
 	text-align: center;
@@ -470,7 +477,7 @@ html, body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 50% 50%;
-	background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')
+	background-image:url('../images/nyc-wood-bg.jpg')
 }
 
 #about-box {
@@ -574,7 +581,7 @@ html, body {
 }
 
 .hero-marker {
-	background: rgb(57, 57, 57);
+	background: #656262;
 	height: 70px;
 	width: 6px;
 
@@ -617,11 +624,11 @@ html, body {
 	position: relative;
 	margin-top: -20px; /* negative value of footer height */
 	height: 30px;
-	clear:both;
+	clear: both;
 	color: #656262;
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 100;
+	font-weight: 400;
 }
 
 #footer ul li {
@@ -632,6 +639,11 @@ html, body {
 #footer ul li a {
 	text-decoration: none;
 	color: #656262;
+}
+
+#footer ul li a:hover {
+	text-decoration: none;
+	color: black;
 }
 
 #footer :not(:last-child):after {

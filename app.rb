@@ -173,10 +173,9 @@ get '/signS3put' do
 	require 'json'
 	puts "Signing GET request received"
 	
-	# These are set as environment variables
-	# S3_BUCKET_NAME = 'shortlistapp'
-	# S3_SECRET_KEY = ''
-	# S3_ACCESS_KEY = ''
+	S3_BUCKET_NAME = ENV['S3_BUCKET_NAME']
+	S3_SECRET_KEY = ENV['S3_SECRET_KEY']
+	S3_ACCESS_KEY = ENV['S3_ACCESS_KEY']
 	S3_URL = 'http://s3.amazonaws.com/'
 
 	objectName = params[:s3_object_name]

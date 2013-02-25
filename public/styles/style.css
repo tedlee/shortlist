@@ -77,8 +77,28 @@ html, body {
 	-moz-animation: fadeIn 1.00s ease;
 }
 
+.animate-avatar {
+	-webkit-animation: delayedFadeIn 1.00s ease;
+	-moz-animation: delayedFadeIn 1.00s ease;
+}
+
 @-webkit-keyframes fadeIn {
 	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-webkit-keyframes delayedFadeIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}
+	50% {
 		opacity: 0;
 		-webkit-transform: translateY(-20px);
 	}
@@ -112,9 +132,10 @@ html, body {
 	text-align: center;
 	display: block;
 	margin-top: 40px;
+	margin-bottom: 5px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 2em;
-	font-weight: 700;
+	font-weight: 800;
 	text-shadow: 0px 0px 0 #656262;
 	color: black;
 }
@@ -303,17 +324,41 @@ html, body {
 	width: 240px;
 }
 
-.button:hover {
+.button:hover, .upload-button {
 	background-color: #EB5858;
 	color: #fff;
 }
 
-.button {
+.button, .upload-button {
 	-webkit-transition: color .25s, background .25s, opacity .25s;
 	-moz-transition: color .25s, background .25s, opacity .25s;
 	-ms-transition: color .25s, background .25s, opacity .25s;
 	-o-transition: color .25s, background .25s, opacity .25s;
 	transition: color .25s, background .25s, opacity .25s;
+}
+
+.upload-button {
+
+	background: #fff;
+	color: #050505;
+	border: 2px solid #050505;
+
+	margin-top: 15px;
+	margin-bottom: 10px;
+	padding-top: 5px;
+	display: block;
+	font-size: 1.00em;
+	letter-spacing: 1px;
+	border-radius: 3px;
+	font-family: 'Open Sans', sans-serif;
+	display: inline-block;
+	width: 240px;
+	position: absolute;
+	height: 20px;
+	line-height: 16px;
+	width: 234px;
+	margin-left:3px;
+	margin-top:10px;
 }
 
 .link-input {

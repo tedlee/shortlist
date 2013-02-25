@@ -129,6 +129,8 @@ end
 post "/signup" do
 	User.create(:username => params[:username], :password => params[:password], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
 
+	puts params[:user_avatar]
+
 	if env['warden'].authenticate
 		redirect "/#{env['warden'].user.username}"
 	else
@@ -162,6 +164,34 @@ end
 get "/about" do
 	@title = "Shortlist - About"
 	erb :about
+end
+
+get '/signS3put' do
+
+	require "cgi"
+	require "base64"
+	require 'json'
+	puts "Signing GET request received"
+	
+	# These are set as environment variables
+	# S3_BUCKET_NAME = 'shortlistapp'
+	# S3_SECRET_KEY = ''
+	# S3_ACCESS_KEY = ''
+	S3_URL = 'http://s3.amazonaws.com/'
+
+	objectName = params[:s3_object_name]
+	puts objectName
+	mimeType = params['s3_object_type']
+	expires = Time.now.to_i + 100 # PUT request to S3 must start within 100 seconds
+
+	amzHeaders = "x-amz-acl:public-read" # set the public read permission on the uploaded file
+	stringToSign = "PUT\n\n#{mimeType}\n#{expires}\n#{amzHeaders}\n/#{S3_BUCKET_NAME}/#{objectName}";
+	sig = CGI::escape(Base64.strict_encode64(OpenSSL::HMAC.digest('sha1', S3_SECRET_KEY, stringToSign)))
+
+	{
+		signed_request: CGI::escape("#{S3_URL}#{S3_BUCKET_NAME}/#{objectName}?AWSAccessKeyId=#{S3_ACCESS_KEY}&Expires=#{expires}&Signature=#{sig}"),
+		url: "http://s3.amazonaws.com/#{S3_BUCKET_NAME}/#{objectName}"
+	}.to_json
 end
 
 post "/:username/add" do
@@ -254,6 +284,8 @@ post "/:username/delete/:id" do
 		end
 	end
 end
+
+
 
 not_found do  
 	halt 404, 'No page for you.'  

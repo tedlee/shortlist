@@ -42,7 +42,7 @@
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>
 			<form action="/<%= @user.username %>/add" method="post">
-				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
+				<input type="url" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
 				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
 				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:5px; margin-left: 5px; text-transform: none;" class="button" value="Add Link">
 			</form>

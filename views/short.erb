@@ -35,7 +35,7 @@
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>
 			<form style="display: inline-block;" action="/<%= @user.username %>/edit/<%= @link.id %>" method="post">
-				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" value="<%= @link.url %>" autocomplete="off"/>
+				<input type="url" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" value="<%= @link.url %>" autocomplete="off"/>
 				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="title" value="<%= @link.title %>" autocomplete="off"/>
 				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:5px; margin-left: 5px; text-transform: none;" class="button" value="Confirm Edit">
 			</form>

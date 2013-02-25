@@ -1,14 +1,58 @@
-<div class="title"> Shortlist </div>
+<div class="title"> Hey there! </div>
 
 <div class="hero-marker"></div>
+<script type="text/javascript" src="../scripts/underscore-min.js"></script>
+<script type="text/javascript" src="../scripts/s3-upload.js"></script>
 
 <div id="signup-box">
 	<form action="/signup" method="post">
-		<input type="text" class="link-input" name="username" placeholder="Username"/>
+		<input type="text" class="link-input" name="username" placeholder="Username" autofocus/>
 		<input type="password" class="link-input" name="password" placeholder="Password"/>
 		<input type="text" class="link-input" name="firstname" placeholder="First Name"/>
 		<input type="text" class="link-input" name="lastname" placeholder="Last Name"/>
-		<input type="text" class="link-input" name="user_avatar" placeholder="Your Avatar (URL)"/>
-		<input type="submit" class="button" value="Add User">
+		<input type="text" style="display:none" class="link-input" name="user_avatar" placeholder="Your Avatar (URL)"/>
+
+		<!-- This is quite a hacky way to style an input box. My eyes bleed just looking at this -->
+		<!-- Programmers talk a lot about solving hard problems — CAN WE PLEASE SOLVE THIS NEXT FOLKS -->
+		<div style="position:relative;">
+			<div id="file" class="upload-button">Add Profile Picture</div>
+			<input type="file" style="opacity:0; z-index:1; margin-top:10px;" class="button" name="upload_user_avatar" />
+		</div>
+		<input type="submit" class="button" style="margin-top: 0px;" value="Add User">
 	</form>
 </div>
+
+
+<script>
+
+$(function() {
+	$("input:file").change(function (){
+		var s3upload = s3upload != null ? s3upload : new S3Upload({
+			file_dom_selector: 'input[type=file]',
+ 			s3_sign_put_url: '/signS3put',
+			onProgress: function(percent, message) { // Use this for live upload progress bars
+				//console.log('Upload progress: ', percent, message);
+				$('.upload-button').empty()
+				$('.upload-button').text('Uploading (' + percent +'% Done\)')
+			},
+			onFinishS3Put: function(public_url) { // Get the URL of the uploaded file
+				//console.log('Upload finished: ', public_url);
+				$('.upload-button').empty();
+				$('.upload-button').text('Done!');
+				$('input[name="user_avatar"]').val(public_url)
+
+				if ($('.animate-avatar').length) {
+					$('.animate-avatar').remove();
+					$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
+				} else {
+					$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
+				}
+			},
+			onError: function(status) {
+				console.log('Upload error: ', status);
+			}
+		});
+	});
+});
+
+</script>

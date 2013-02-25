@@ -2,10 +2,19 @@
 
 	<div class="log-entry">
 		<div class="log-date">
+			February 24nd 2013
+		</div>
+		<div class="log-description">
+			Sunday's focus was on implementing profile photo uploads when a user signs up. There are about a million and one ways to do this but after surveying a few options I went with client-side uploads to AWS S3. This obviates the need for the file data to actually pass through the server and instead is sent straight to S3. How this works: once a file is selected by the user the client then asks the server for one-time upload permissions to S3. This is now all possible thanks to Amazon recently opening up CORS (Cross Origin Resource Sharing). If permission is granted by the server the upload is made and the file URL is returned to the client. I'm pretty happy with how it turned out. Oddly enough, the most challenging aspect to all of this was styling the file input box. For all the advancement we've had with web technologies in recent years we're still stuck with really mediocre 'hacks' for styling input boxes. After a perusal of StackOverflow responses to this issue essentially the solution (if you can call it that!) boils down to overlaying the actual input box over a button. Setting the opacity of the input box to zero which gives the illusion that you're actually clicking on a button but instead clicking on the "Browse for file..." button. I'm not happy with that aspect of the implementation but it's good enough for now. Ah the plight of the perfectionist. Anyways, done is better perfect...right?
+		</div>
+	</div>
+
+	<div class="log-entry">
+		<div class="log-date">
 			February 22nd 2013
 		</div>
 		<div class="log-description">
-			Did a bunch of UI clean-up on the input boxes and buttons. It's getting better but is still going to require some tickering.
+			Did a bunch of UI clean-up on the input boxes and buttons. It's getting better but is still going to require some tinkering.
 		</div>
 	</div>
 
@@ -14,7 +23,7 @@
 			February 21st 2013
 		</div>
 		<div class="log-description">
-			Implemented a feature that pops-up a users avatar as they login with their username. Initially I wrote an API that was pinged every keystroke but I quickly realized that this was much more expensive than was actually needed. Instead, on loading '/login' a rejest is made for a JSON document that contains all usernames and their associated avatar URLs. Then as a user types I check against that list. One server hit instead number of keystrokes. Much more efficient. 
+			Implemented a feature that pops-up a users avatar as they login with their username. Initially I wrote an API that was pinged every keystroke but I quickly realized that this was much more expensive than was actually needed. Instead, on loading '/login' a request is made for a JSON document that contains all usernames and their associated avatar URLs. Then as a user types I check against that list. One server hit instead number of keystrokes. Much more efficient. 
 		</div>
 	</div>
 

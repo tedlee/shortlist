@@ -25,7 +25,7 @@ class User
 	property :firstname, 	String, required: true
 	property :lastname, 	String, required: true
 	#property :email, 		String, format: :email_address  
-	property :user_avatar, 	Text, :format => :url, required: false
+	property :user_avatar, 	Text, :format => :url, required: true
 	property :created_at, 	DateTime
 
 	def username= new_username

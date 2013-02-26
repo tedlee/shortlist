@@ -8,15 +8,27 @@
 <div id="shorts">
 	<div id="time-bar"> <div class="current-date"><%= @link.created_at %></div> </div>
 
+	<%
+
+	def check_website_url(website_url)
+		if website_url[/^h?t?t?p?s?:?\/?\/?w?w?w?\.?(.*\.[A-Z\/]{2,})$/i]
+			website_id = $1
+		end
+
+		%Q{#{ website_id }}
+	end
+
+	%>
+
 	<% if @user.links %>
 		<div class="short-container">
 			<% if %w[.png .jpg .gif .bmp].include? File.extname(@link.url) %>
 				<div class="short-cover" style="background-image:url('<%= @link.url %>')"></div>
-			<% elsif %w[youtube.com].include? URI.parse(@link.url).host %>
+			<% elsif @link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/] %>
 				<%= youtube_embed(@link.url) %>
-			<% elsif %w[vimeo.com].include? URI.parse(@link.url).host %>
+			<% elsif @link.url[/(vimeo\.com\/)/] %>
 				<%= vimeo_embed(@link.url) %>
-			<% elsif %w[soundcloud.com].include? URI.parse(@link.url).host %>
+			<% elsif @link.url[/(soundcloud\.com\/)/] %>
 				<%= soundcloud_embed(@link.url) %>
 			<% else %>
 				<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>

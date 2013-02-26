@@ -29,7 +29,12 @@
 			<% elsif @link.url[/(vimeo\.com\/)/] %>
 				<%= vimeo_embed(@link.url) %>
 			<% elsif @link.url[/(soundcloud\.com\/)/] %>
-				<%= soundcloud_embed(@link.url) %>
+				<% soudcloud_response = soundcloud_embed(@link.url) %>
+				<% if soudcloud_response != "Soundcloud API is down" %>
+					<%= soudcloud_response %>
+				<% else %>
+					<div class="short-cover" style="background-image:url('http://f.cl.ly/items/3J3u0e1n1F1j382X2P0a/soundcloud-down.jpg'); height: 300px;"> </div>
+				<% end %>
 			<% else %>
 				<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 			<% end %>

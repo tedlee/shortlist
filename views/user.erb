@@ -20,7 +20,12 @@
 					<% elsif %w[vimeo.com].include? URI.parse(link.url).host %>
 						<%= vimeo_embed(link.url) %>
 					<% elsif %w[soundcloud.com].include? URI.parse(link.url).host %>
-						<%= soundcloud_embed(link.url) %>
+						<% soudcloud_response = soundcloud_embed(link.url) %>
+						<% if soudcloud_response != "Soundcloud API is down" %>
+							<%= soudcloud_response %>
+						<% else %>
+							<div class="short-cover" style="background-image:url('http://f.cl.ly/items/3J3u0e1n1F1j382X2P0a/soundcloud-down.jpg'); height: 300px;"> </div>
+						<% end %>
 					<% else %>
 						<% puts "Non Vimeo Link!!" %>
 						<div class="short-cover" style="background-image:url('http://tedlee.s3.amazonaws.com/shortlist-placeholder.jpg')"> </div>

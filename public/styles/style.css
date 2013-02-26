@@ -465,6 +465,9 @@ html, body {
 	text-align: center;
 	width: 300px;
 	height: 370px;
+	border-color: rgb(57, 57, 57);
+	border-width: 2px;
+	border-style: solid;
 }
 
 #login-avatar {
@@ -472,6 +475,9 @@ html, body {
 	display: block;
 	height: 220px;
 	margin-bottom: 5px;
+	border-color: rgb(57, 57, 57);
+	border-bottom-width: 2px;
+	border-style: solid;
 
 	width: 100%;
 	background-repeat: no-repeat;

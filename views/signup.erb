@@ -29,31 +29,37 @@
 
 $(function() {
 	$("input:file").change(function (){
-		var s3upload = s3upload != null ? s3upload : new S3Upload({
-			file_dom_selector: 'input[type=file]',
- 			s3_sign_put_url: '/signS3put',
-			onProgress: function(percent, message) { // Use this for live upload progress bars
-				//console.log('Upload progress: ', percent, message);
-				$('.upload-button').empty()
-				$('.upload-button').text('Uploading (' + percent +'% Done\)')
-			},
-			onFinishS3Put: function(public_url) { // Get the URL of the uploaded file
-				//console.log('Upload finished: ', public_url);
-				$('.upload-button').empty();
-				$('.upload-button').text('Done!');
-				$('input[name="user_avatar"]').val(public_url)
+		var file_extension = $("input:file").val().split('.').pop().toLowerCase();
+		if ($.inArray(file_extension, ['gif','png','jpg', 'bmp', 'jpeg']) > 0) {
+			if (this.files[0].size < 1048576) {
+				
+				var s3upload = s3upload != null ? s3upload : new S3Upload({
+					file_dom_selector: 'input[type=file]',
+		 			s3_sign_put_url: '/signS3put',
+					onProgress: function(percent, message) { // Use this for live upload progress bars
+						//console.log('Upload progress: ', percent, message);
+						$('.upload-button').empty()
+						$('.upload-button').text('Uploading (' + percent +'% Done\)')
+					},
+					onFinishS3Put: function(public_url) { // Get the URL of the uploaded file
+						//console.log('Upload finished: ', public_url);
+						$('.upload-button').empty();
+						$('.upload-button').text('Done!');
+						$('input[name="user_avatar"]').val(public_url)
 
-				if ($('.animate-avatar').length) {
-					$('.animate-avatar').remove();
-					$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
-				} else {
-					$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
-				}
-			},
-			onError: function(status) {
-				console.log('Upload error: ', status);
-			}
-		});
+						if ($('.animate-avatar').length) {
+							$('.animate-avatar').remove();
+							$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
+						} else {
+							$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
+						}
+					},
+					onError: function(status) {
+						console.log('Upload error: ', status);
+					}
+				});
+			}else {alert("Whoa that's a big file! To keep things fast we limit profile photo sizes to under 1 MB.")}
+		}else {alert("Sure that's the right file? We don't support that kind of file.")}
 	});
 });
 

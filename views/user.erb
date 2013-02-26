@@ -15,11 +15,11 @@
 					<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
 						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
 					<% #Bug here that will catch all URLS that end in youtube.com and doesn't accept URLs with just "www." prefix %>
-					<% elsif %w[youtube.com].include? URI.parse(link.url).host %>
+					<% elsif link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/] %>
 						<%= youtube_embed(link.url) %>
-					<% elsif %w[vimeo.com].include? URI.parse(link.url).host %>
+					<% elsif link.url[/(vimeo\.com\/)/] %>
 						<%= vimeo_embed(link.url) %>
-					<% elsif %w[soundcloud.com].include? URI.parse(link.url).host %>
+					<% elsif link.url[/(soundcloud\.com\/)/] %>
 						<% soudcloud_response = soundcloud_embed(link.url) %>
 						<% if soudcloud_response != "Soundcloud API is down" %>
 							<%= soudcloud_response %>

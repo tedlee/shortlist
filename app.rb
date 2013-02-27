@@ -205,6 +205,36 @@ post "/:username/add" do
 	end
 end
 
+get "/settings" do
+	@user = User.get(env['warden'].user.username)
+
+	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+		@title = "Settings"
+		erb :settings
+	else
+		"Either that user doesn't exist or you don't have any settings yet. Try logging in."
+	end
+end
+
+post "/settings" do
+	@user = User.get(env['warden'].user.username)
+
+	puts "Env username is: " + env['warden'].user.username
+	puts "Username trying to be changed:" + @user.username
+	puts params[:username]
+	puts params[:firstname]
+	puts params[:lastname]
+	puts params[:user_avatar]
+
+	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+		if @user.update(:username => params[:username], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar])
+			redirect "/#{env['warden'].user.username}"
+		else
+			redirect back
+		end
+	end
+end
+
 get "/:username" do
 	@user = User.get params[:username]
 

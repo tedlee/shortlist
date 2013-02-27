@@ -52,12 +52,8 @@ $(function() {
 						$('.upload-button').text('Done!');
 						$('input[name="user_avatar"]').val(public_url)
 
-						if ($('.animate-avatar').length) {
-							$('.animate-avatar').remove();
-							$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
-						} else {
-							$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
-						}
+						$('.avatar').attr('src', public_url);
+						$('.nav-avatar').attr('src', public_url);
 					},
 					onError: function(status) {
 						console.log('Upload error: ', status);

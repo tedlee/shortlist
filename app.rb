@@ -122,7 +122,7 @@ get "/" do
 end
 
 get "/signup" do
-	@users = User.all(:order => :username.desc)
+	@title = "Shortlist - Sign Up"
 	erb :signup
 end
 

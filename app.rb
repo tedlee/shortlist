@@ -222,11 +222,8 @@ end
 post "/settings" do
 	@user = User.get(env['warden'].user.username)
 
-	puts "Env username is: " + env['warden'].user.username
-	puts "Username trying to be changed:" + @user.username
-
 	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
-		if @user.update(:username => params[:username], :fullname => params[:fullname], :email => params[:email], :user_avatar => params[:user_avatar])
+		if @user.update(:username => params[:username], :fullname => params[:fullname], :user_email => params[:user_email], :user_avatar => params[:user_avatar])
 			redirect "/#{env['warden'].user.username}"
 		else
 			redirect back

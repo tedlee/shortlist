@@ -6,8 +6,8 @@
 </div>
 
 <div id="shorts">
-	<div id="add-bar">
-		<% if (env['warden'].authenticate) && (@user.username == env['warden'].user.username) %>
+	<% if (env['warden'].authenticate) && (@user.username == env['warden'].user.username) %>
+		<div id="add-bar">
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>
 			<form action="/<%= @user.username %>/add" method="post">
@@ -15,8 +15,8 @@
 				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
 				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:5px; margin-left: 5px; text-transform: none;" class="button" value="Add Link">
 			</form>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
 
 	<div id="time-bar"> <div class="current-date"></div> </div>
 	<% count = 1 %>

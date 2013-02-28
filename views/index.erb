@@ -1,6 +1,18 @@
 <!-- Main Page Here -->
 
 <div id="shorts">
+	<% if (env['warden'].authenticate) %>
+		<div id="add-bar">
+			<% puts env['warden'].user.username %>
+
+			<form action="/<%= env['warden'].user.username %>/add" method="post">
+				<input type="url" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
+				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="title" placeholder="Title" autocomplete="off"/>
+				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:5px; margin-left: 5px; text-transform: none;" class="button" value="Add Link">
+			</form>
+		</div>
+	<% end %>
+
 	<div id="time-bar"> <div class="current-date"></div> </div>
 	<% count = 1 %>
 	<% if @links %>

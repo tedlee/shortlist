@@ -10,8 +10,8 @@
 	<form action="/signup" method="post">
 		<input type="text" class="link-input" name="username" placeholder="Username" autofocus/>
 		<input type="password" class="link-input" name="password" placeholder="Password"/>
-		<input type="text" class="link-input" name="firstname" placeholder="First Name"/>
-		<input type="text" class="link-input" name="lastname" placeholder="Last Name"/>
+		<input type="text" class="link-input" name="fullname" placeholder="Your Full Name"/>
+		<input type="text" class="link-input" name="user_email" placeholder="Your Email"/>
 		<input type="text" style="display:none" class="link-input" name="user_avatar" placeholder="Your Avatar (URL)"/>
 
 		<!-- This is quite a hacky way to style an input box. My eyes bleed just looking at this -->
@@ -32,7 +32,7 @@ $(function() {
 		var file_extension = $("input:file").val().split('.').pop().toLowerCase();
 		if ($.inArray(file_extension, ['gif','png','jpg', 'bmp', 'jpeg']) > 0) {
 			if (this.files[0].size < 1048576) {
-				
+
 				var s3upload = s3upload != null ? s3upload : new S3Upload({
 					file_dom_selector: 'input[type=file]',
 		 			s3_sign_put_url: '/signS3put',

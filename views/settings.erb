@@ -13,10 +13,10 @@
 	<form action="/settings" method="post">
 		<label class="settings-label">Username</label>
 		<input type="text" class="link-input" name="username" value="<%= @user.username %>" autofocus/>
-		<label class="settings-label">First Name</label>
-		<input type="text" class="link-input" name="firstname" value="<%= @user.firstname %>"/>
-		<label class="settings-label">Last Name</label>
-		<input type="text" class="link-input" name="lastname" value="<%= @user.lastname %>"/>
+		<label class="settings-label">Your Full Name</label>
+		<input type="text" class="link-input" name="fullname" value="<%= @user.fullname %>"/>
+		<label class="settings-label">Your Email</label>
+		<input type="text" class="link-input" name="email" value="<%= @user.user_email %>"/>
 		<input type="text" style="display:none" class="link-input" name="user_avatar" value="<%= @user.user_avatar  %>"/>
 
 		<!-- This is quite a hacky way to style an input box. My eyes bleed just looking at this -->

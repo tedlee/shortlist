@@ -19,12 +19,14 @@ class User
 
 	# This might because of the number of arguments that are passed in at POST /:signup
 
+	# Note: when adding new fields you can't require them immediately because the migration thinks that that field
+	# should have a value (and for all instances of the User class they do not)
+
 	#property :id, 			Serial
 	property :username,		String, required: true, unique: true, :key => true
 	property :password,		BCryptHash
-	property :firstname, 	String, required: true
-	property :lastname, 	String, required: true
-	#property :email, 		String, format: :email_address  
+	property :fullname, 	String
+	property :user_email,	String, format: :email_address  
 	property :user_avatar, 	Text, :format => :url, required: true
 	property :created_at, 	DateTime
 
@@ -60,7 +62,7 @@ end
 
 
 configure :development do
-	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist")
+	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist2")
 	DataMapper.auto_upgrade!
 	#DataMapper.auto_migrate! # wipes everything
 	DataMapper.finalize
@@ -127,14 +129,15 @@ get "/signup" do
 end
 
 post "/signup" do
-	User.create(:username => params[:username], :password => params[:password], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar], :created_at => Time.now)
 
-	puts params[:user_avatar]
+	# TODO - add username checking aginst existing usernames and forbidden phrases
+	User.create(:username => params[:username], :password => params[:password], :fullname => params[:fullname], :user_email => params[:user_email], :user_avatar => params[:user_avatar], :created_at => Time.now)
 
 	if env['warden'].authenticate
 		redirect "/#{env['warden'].user.username}"
 	else
-		redirect '/login'
+		puts "not authenticated"
+		redirect '/signup'
 	end
 end
 
@@ -221,13 +224,9 @@ post "/settings" do
 
 	puts "Env username is: " + env['warden'].user.username
 	puts "Username trying to be changed:" + @user.username
-	puts params[:username]
-	puts params[:firstname]
-	puts params[:lastname]
-	puts params[:user_avatar]
 
 	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
-		if @user.update(:username => params[:username], :firstname => params[:firstname], :lastname => params[:lastname], :user_avatar => params[:user_avatar])
+		if @user.update(:username => params[:username], :fullname => params[:fullname], :email => params[:email], :user_avatar => params[:user_avatar])
 			redirect "/#{env['warden'].user.username}"
 		else
 			redirect back

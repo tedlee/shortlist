@@ -91,7 +91,7 @@
 	    // TODO: The current logged in user's email address.
 	    email: "<%= User.get(env['warden'].user.username).user_email %>",
 	    // TODO: The current logged in user's sign-up date as a Unix timestamp.
-	    created_at: <%= User.get(env['warden'].user.username).created_at %>,
+	    created_at: <%= User.get(env['warden'].user.username).created_at.to_time.to_i %>,
 	    app_id: "de51b166ca470bd2d22be7a5f63aa810b8440eda"
 	  };
 	</script>

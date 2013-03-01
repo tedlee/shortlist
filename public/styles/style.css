@@ -129,7 +129,8 @@ html, body {
 	margin-left: auto;
 	margin-top: 45px;
 	width: 85%;
-	min-width: 300px;
+	min-width: 920px;
+	max-width: 1200px;
 }
 
 .title {

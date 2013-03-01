@@ -4,6 +4,7 @@ require "warden"
 require 'dm-types'
 require "sinatra/contrib"
 require "jsonify"
+require "faraday"
 
 configure :production do
 	require 'newrelic_rpm'
@@ -134,6 +135,8 @@ post "/signup" do
 	User.create(:username => params[:username], :password => params[:password], :fullname => params[:fullname], :user_email => params[:user_email], :user_avatar => params[:user_avatar], :created_at => Time.now)
 
 	if env['warden'].authenticate
+		send_welcome_message(params[:user_email], params[:fullname])
+		set :erb, :layout => true
 		redirect "/#{env['warden'].user.username}"
 	else
 		puts "not authenticated"
@@ -361,4 +364,24 @@ def soundcloud_embed(soundcloud_url)
 			"Soundcloud API is down"
 		end
 	end
+end
+
+def send_welcome_message(email, fullname)
+	# Send Greeting message
+	conn = Faraday.new(:url => 'https://api.mailgun.net/v2') do |faraday|
+		faraday.request  :url_encoded
+		faraday.adapter  Faraday.default_adapter
+	end
+
+	conn.basic_auth('api', 'key-8q69y-ssazgujpbohiedzm4s3oyoz911')
+	set :erb, :layout => false
+
+	fields = {
+		:from => 'Ted Lee <ted@shortlist.mailgun.org>',
+		:to => email,
+		:subject => 'Welcome to Shortlist!',
+		:html => erb(:welcome_email, :locals => {:fullname => fullname})
+	}
+	puts fields
+	conn.post('shortlist.mailgun.org/messages', fields)
 end

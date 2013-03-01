@@ -580,6 +580,7 @@ html, body {
 	box-shadow: 0 0 0 1px #050505, 0 0 3px #918282;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+	background-color: white;
 }
 
 .center {
@@ -604,6 +605,7 @@ html, body {
 	margin-right: auto;
 	margin-left: auto;
 	border-radius: 5px;
+	background-color: white;
 	margin-top: 0; /* Padding is set via #hero padding-top: 100px ; */
 }
 

@@ -28,7 +28,9 @@
 					<div id="inner-navbar" style="height: 50px; line-height: 50px;">
 						<!-- When user is signed in -->
 						<div class="left-logo animate-title"><a href="/">Shortlist</a></div>
-						<a href="/<%= env['warden'].user.username %>"><img src="<%= User.get(env['warden'].user.username).user_avatar %>" class="nav-avatar"></a>
+						<% if @display_nav_avatar == true %>
+							<a href="/<%= env['warden'].user.username %>"><img src="<%= User.get(env['warden'].user.username).user_avatar %>" class="nav-avatar"></a>
+						<% end %>
 						<div class="right-button"><a href="/settings">Settings</a></div>
 						<div class="right-button"><a href="/logout">Logout</a></div>
 					</div>

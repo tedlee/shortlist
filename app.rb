@@ -117,7 +117,7 @@ end
 
 get "/" do
 	@title = "Shortlist"
-
+	@display_nav_avatar = true
 	#@user_count = User.all().count.to_s()
 	#set :erb, :layout => false
 	@links = Link.all()
@@ -126,6 +126,7 @@ end
 
 get "/signup" do
 	@title = "Shortlist - Sign Up"
+	@display_nav_avatar = true
 	erb :signup
 end
 
@@ -163,11 +164,13 @@ get "/logout/?" do
 end
 
 get "/changelog" do
+	@display_nav_avatar = true
 	@title = "Shortlist - Signup"
 	erb :changelog
 end
 
 get "/about" do
+	@display_nav_avatar = true
 	@title = "Shortlist - About"
 	erb :about
 end
@@ -215,6 +218,11 @@ get "/settings" do
 	@user = User.get(env['warden'].user.username)
 
 	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+		if (@user.username != env['warden'].user.username)
+			@display_nav_avatar = true
+		else
+			@display_nav_avatar = false
+		end
 		@title = "Settings"
 		erb :settings
 	else
@@ -237,11 +245,17 @@ end
 get "/:username" do
 	@user = User.get params[:username]
 
-	#@links = Link.all(:user_username => @user.username)
-
+	# @links = Link.all(:user_username => @user.username)
 	# To get all the links from a user do @user.links.all()
+	# @user.respond_to?(:value)
 
 	if @user
+		if (@user.username != env['warden'].user.username)
+			@display_nav_avatar = true
+		else
+			@display_nav_avatar = false
+		end
+
 		@title = "The Shortlist of #{@user.username}"
 		erb :user
 	else
@@ -278,6 +292,12 @@ get "/:username/:id" do
 	# To get all the links from a user do @user.links.all()
 
 	if @user && @link
+		if (@user.username != env['warden'].user.username)
+			@display_nav_avatar = true
+		else
+			@display_nav_avatar = false
+		end
+
 		@title = "The Shortlist of #{@user.username}"
 		erb :short
 	else

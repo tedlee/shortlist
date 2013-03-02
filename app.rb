@@ -215,14 +215,10 @@ post "/:username/add" do
 end
 
 get "/settings" do
-	@user = User.get(env['warden'].user.username)
 
-	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
-		if (@user.username != env['warden'].user.username)
-			@display_nav_avatar = true
-		else
-			@display_nav_avatar = false
-		end
+	if (env['warden'].authenticate) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+		@user = User.get(env['warden'].user.username)
+		@display_nav_avatar = false
 		@title = "Settings"
 		erb :settings
 	else
@@ -250,7 +246,7 @@ get "/:username" do
 	# @user.respond_to?(:value)
 
 	if @user
-		if (@user.username != env['warden'].user.username)
+		if (env['warden'].authenticate) && (@user.username != env['warden'].user.username)
 			@display_nav_avatar = true
 		else
 			@display_nav_avatar = false
@@ -292,7 +288,7 @@ get "/:username/:id" do
 	# To get all the links from a user do @user.links.all()
 
 	if @user && @link
-		if (@user.username != env['warden'].user.username)
+		if (env['warden'].authenticate) &&(@user.username != env['warden'].user.username)
 			@display_nav_avatar = true
 		else
 			@display_nav_avatar = false

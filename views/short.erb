@@ -40,14 +40,17 @@
 			<% end %>
 			<div id="short-details">
 				<div class="short-title"><a href="/<%= @link.user_username %>/<%= @link.id %>"> <%= @link.title %> </a></div>
-				<div class="short-link"><a href="<%= @link.url %>">Link</a></div>
-				<!-- <div class="short-fav"><a href="#" class="fav-button">★ <%= @link.favourites %></a></div> -->
-				<div class="short-author">[via <a href="/<%= @link.user_username %>"><%= @link.user_username %></a>]</div>
+
+				<div class="short-author" title="<%= @link.id %>"> — <a href="<%= @link.url %>">link</a> via <a href="/<%= @link.user_username %>"><%= @link.user_username %></a>.</div>
+				<div class="short-fav">
+					<a href="javascript:void(0)" onclick="favThis(this);">★</a>
+					<div class="short-fav-count"><%= @link.favourites %></div>
+				</div> 
 			</div>
 		</div> 
 	<% end %>
 
-	<div id="add-bar" style="padding-bottom: 5px;">
+	<div id="add-bar" style="padding-bottom: 5px; border-top-left-radius: 0px; border-top-right-radius: 0px;">
 		<% if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username)) %>
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>
@@ -62,6 +65,52 @@
 		<% end %>
 	</div>
 </div>
+
+<script>
+
+alreadyFaved = false;
+
+function favThis(favObj) {
+	if (alreadyFaved == false) {
+		shortAuthor = $(favObj).parent().parent().children('.short-author').children('a:eq(1)').text();
+		console.log(shortAuthor);
+
+		shortID = $(favObj).parent().parent().children('.short-author').attr('title');
+		console.log(shortID);
+		if (makeRequest(shortAuthor, shortID) == true) {
+			incrementFav(favObj);
+			alreadyFaved = true;
+		} else { console.log("Cannot change fav status")}
+
+	}
+};
+
+function makeRequest(shortAuthor, shortID) {
+	var requestURL = "/" + shortAuthor + "/fav/" + shortID;
+	console.log("Query being made for: "+ requestURL)
+	var canFav = false;
+
+	$.ajax({
+		type: "POST",
+		url: requestURL,
+		async: false,
+		success: function(result) {
+			canFav = true;
+		}
+	});
+
+	return canFav
+}
+
+function incrementFav(favObj) {
+	current_fav_count = parseInt($(favObj).parent().children('.short-fav-count').text());
+	$(favObj).parent().children('.short-fav-count').empty();
+	current_fav_count ++;
+	$(favObj).css({"color":"#EB5858"});
+	$(favObj).parent().children('.short-fav-count').text(current_fav_count);
+}
+
+</script>
 
 
 

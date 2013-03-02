@@ -327,6 +327,19 @@ post "/:username/delete/:id" do
 	end
 end
 
+post "/:username/fav/:id" do
+	@user = User.get params[:username]
+	@link = @user.links.get params[:id]
+	puts @link.title
+
+	fav_count = @link.favourites
+	fav_count += 1
+
+	if @link.update(:favourites => fav_count)
+		# updated
+	end
+end
+
 
 
 not_found do  

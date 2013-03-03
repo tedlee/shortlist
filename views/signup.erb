@@ -49,9 +49,17 @@ $(function() {
 
 						if ($('.animate-avatar').length) {
 							$('.animate-avatar').remove();
-							$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
+							jQuery('<div/>', {
+								id: 'foo',
+								class: 'nav-avatar animate-avatar',
+								style: 'background-image:url("' + public_url + '")',
+							}).insertAfter('.left-logo');
 						} else {
-							$('<a href="/"><img src="' + public_url + '" class="nav-avatar animate-avatar"></a>').insertAfter('.left-logo');
+							jQuery('<div/>', {
+								id: 'foo',
+								class: 'nav-avatar animate-avatar',
+								style: 'background-image:url("' + public_url + '")',
+							}).insertAfter('.left-logo');
 						}
 					},
 					onError: function(status) {

@@ -1,7 +1,7 @@
 
 <div id="hero" style="background-image:url('../images/nyc-wood-bg.jpg')">
 	<!-- <img src='../images/ted.jpg' class="avatar"> -->
-	<a href="/<%= @user.username %>"><img src="<%= @user.user_avatar %>" class="avatar"></a>
+	<a href="/<%= @user.username %>"><div style="background-image:url('<%= @user.user_avatar %>')" class="avatar"></div></a>
 	<div class="hero-marker"></div> 
 </div>
 
@@ -52,8 +52,8 @@ $(function() {
 						$('.upload-button').text('Done!');
 						$('input[name="user_avatar"]').val(public_url)
 
-						$('.avatar').attr('src', public_url);
-						$('.nav-avatar').attr('src', public_url);
+						$('.avatar').css("background-image", "url(" + public_url +")");
+						$('.nav-avatar').css("background-image", "url(" + public_url +")"); 
 					},
 					onError: function(status) {
 						console.log('Upload error: ', status);

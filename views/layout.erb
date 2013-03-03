@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=2.0">
 	<link rel="stylesheet" href="../styles/style.css" type="text/css" />
 	<script type="text/javascript" src="../scripts/jquery.min.js"></script>
 	<script type="text/javascript" src="../scripts/main.js"></script>
@@ -29,7 +29,7 @@
 						<!-- When user is signed in -->
 						<div class="left-logo animate-title"><a href="/">Shortlist</a></div>
 						<% if @display_nav_avatar == true %>
-							<a href="/<%= env['warden'].user.username %>"><img src="<%= User.get(env['warden'].user.username).user_avatar %>" class="nav-avatar"></a>
+							<a href="/<%= env['warden'].user.username %>"><div style="background-image:url('<%= User.get(env['warden'].user.username).user_avatar %>')" class="nav-avatar"></div></a>
 						<% end %>
 						<div class="right-button"><a href="/settings">Settings</a></div>
 						<div class="right-button"><a href="/logout">Logout</a></div>

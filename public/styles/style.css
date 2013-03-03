@@ -633,7 +633,7 @@ html, body {
 	margin-top: 0; /* Padding is set via #hero padding-top: 100px ; */
 
 	background-repeat: no-repeat;
-	background-size: 100% auto;
+	background-size: cover;
 }
 
 .avatar:hover {

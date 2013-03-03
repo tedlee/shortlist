@@ -162,7 +162,7 @@ end
 
 post "/login/?" do
 	if env['warden'].authenticate
-		redirect back
+		redirect "/#{env['warden'].user.username}"
 	else
 		redirect '/login'
 	end

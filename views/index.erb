@@ -36,11 +36,21 @@
 						<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 					<% end %>
 					<div id="short-details">
-						<div class="short-number"> <%= count %>.</div>
 						<div class="short-title"><a href="/<%= link.user_username %>/<%= link.id %>"> <%= link.title %> </a></div>
-						<div class="short-link"><a href="<%= link.url %>">Link</a></div>
-						<!-- <div class="short-fav"><a href="#" class="fav-button">★ <%= link.favourites %></a></div> -->
-						<div class="short-author">[via <a href="/<%= link.user_username %>"><%= link.user_username %></a>]</div>
+
+						<div class="short-author" title="<%= link.id %>"> — <a href="<%= link.url %>">link</a> via <a href="/<%= link.user_username %>"><%= link.user_username %></a>.</div>
+						<div class="short-fav">
+							<% if (env['warden'].authenticate) %>
+								<% if link.favourites.first(:giver => env['warden'].user.username) == nil %>
+									<a href="javascript:void(0)" onclick="favThis(this);">★</a>
+								<% else %>
+									<a style="color:#EB5858" href="javascript:void(0)" onclick="favThis(this);">★</a>
+								<% end %>
+							<% else %>
+								<a href="javascript:void(0)">★</a>
+							<% end %>
+							<div class="short-fav-count"><%= link.num_favourites %></div>
+						</div> 
 					</div>
 				</div> 
 				<% count+=1 %>

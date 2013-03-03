@@ -53,16 +53,16 @@ function makeRequest(shortAuthor, shortID) {
 
 function changeFav(favObj, changeValue) {
 	current_fav_count = parseInt($(favObj).parent().children('.short-fav-count').text());
-	$(favObj).parent().children('.short-fav-count').empty();
+
 	if (changeValue == "increment") {
 		current_fav_count ++;
-		$(favObj).css({"color":"#EB5858"});
+		$(favObj).css('background-position', '0 -25px');
 		$(favObj).parent().children('.short-fav-count').text(current_fav_count);
 		console.log("incremnt successful")
 	}
 	else {
 		current_fav_count --;
-		$(favObj).css({"color":"#656262"});
+		$(favObj).css('background-position', '0 0');
 		$(favObj).parent().children('.short-fav-count').text(current_fav_count);
 		console.log("decrement successful")
 	}

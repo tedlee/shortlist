@@ -337,15 +337,25 @@ html, body {
 	text-align: center;
 }
 
+.short-fav img{
+	width: 25px;
+	height: 25px;
+	margin-bottom: -2px;
+}
+
 .short-fav a{
 	text-decoration: none;
-	font-weight: 700;
-	color: #656262;
-	font-size: 1.5em;
+	text-indent: -9000px;
+
+	display: block;
+	background: url('../images/star.png');
+	background-repeat: no-repeat;
+	height: 25px;
+	width: 25px;
 }
 
 .short-fav a:hover{
-	color: #EB5858;
+	background-position: 0 -25px;
 }
 
 .short-fav-count{

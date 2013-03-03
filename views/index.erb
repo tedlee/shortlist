@@ -42,12 +42,12 @@
 						<div class="short-fav">
 							<% if (env['warden'].authenticate) %>
 								<% if link.favourites.first(:giver => env['warden'].user.username) == nil %>
-									<a href="javascript:void(0)" onclick="favThis(this);">★</a>
+									<a href="javascript:void(0)" onclick="favThis(this);"></a>
 								<% else %>
-									<a style="color:#EB5858" href="javascript:void(0)" onclick="favThis(this);">★</a>
+									<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
 								<% end %>
 							<% else %>
-								<a href="javascript:void(0)">★</a>
+								<a href="javascript:void(0)"></a>
 							<% end %>
 							<div class="short-fav-count"><%= link.num_favourites %></div>
 						</div> 

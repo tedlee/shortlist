@@ -43,8 +43,14 @@
 
 				<div class="short-author" title="<%= @link.id %>"> — <a href="<%= @link.url %>">link</a> via <a href="/<%= @link.user_username %>"><%= @link.user_username %></a>.</div>
 				<div class="short-fav">
-					<a href="javascript:void(0)" onclick="favThis(this);">★</a>
-					<div class="short-fav-count"><%= @link.favourites %></div>
+					<% if (env['warden'].authenticate) %>
+						<% if @link.favourites.first(:giver => env['warden'].user.username) == nil %>
+							<a href="javascript:void(0)" onclick="favThis(this);">★</a>
+						<% else %>
+							<a style="color:#EB5858" href="javascript:void(0)" onclick="favThis(this);">★</a>
+						<% end %>
+					<% end %>
+					<div class="short-fav-count"><%= @link.num_favourites %></div>
 				</div> 
 			</div>
 		</div> 
@@ -68,21 +74,24 @@
 
 <script>
 
-alreadyFaved = false;
-
 function favThis(favObj) {
-	if (alreadyFaved == false) {
+
 		shortAuthor = $(favObj).parent().parent().children('.short-author').children('a:eq(1)').text();
-		console.log(shortAuthor);
 
 		shortID = $(favObj).parent().parent().children('.short-author').attr('title');
 		console.log(shortID);
 		if (makeRequest(shortAuthor, shortID) == true) {
-			incrementFav(favObj);
-			alreadyFaved = true;
-		} else { console.log("Cannot change fav status")}
+			console.log("Trying to increment count")
+			changeFav(favObj, "increment");
+			<% puts "Making MAGIC" %>
+			
+		} else {
+			console.log("Trying to decrement count")
+			changeFav(favObj, "decrement");
+			
+		}
 
-	}
+
 };
 
 function makeRequest(shortAuthor, shortID) {
@@ -94,20 +103,36 @@ function makeRequest(shortAuthor, shortID) {
 		type: "POST",
 		url: requestURL,
 		async: false,
-		success: function(result) {
-			canFav = true;
+		success: function(data) {
+			if (data.canFav == true){
+				canFav = true;
+				console.log("Can fav this")
+			} else if (data.canFav == false) {
+				canFav = false;
+				console.log("Cannot fav this so will decrement fave value")
+			}
 		}
 	});
 
 	return canFav
 }
 
-function incrementFav(favObj) {
+function changeFav(favObj, changeValue) {
 	current_fav_count = parseInt($(favObj).parent().children('.short-fav-count').text());
 	$(favObj).parent().children('.short-fav-count').empty();
-	current_fav_count ++;
-	$(favObj).css({"color":"#EB5858"});
-	$(favObj).parent().children('.short-fav-count').text(current_fav_count);
+	if (changeValue == "increment") {
+		current_fav_count ++;
+		$(favObj).css({"color":"#EB5858"});
+		$(favObj).parent().children('.short-fav-count').text(current_fav_count);
+		console.log("incremnt successful")
+	}
+	else {
+		current_fav_count --;
+		$(favObj).css({"color":"#656262"});
+		$(favObj).parent().children('.short-fav-count').text(current_fav_count);
+		console.log("decrement successful")
+	}
+
 }
 
 </script>

@@ -51,15 +51,25 @@ end
 class Link
 	include DataMapper::Resource
 
-	property :id,			Serial
-	property :url,			String, :length => 500, required: true
-	property :title,		String, :length => 120, required: true
-	property :favourites,	Integer, required: false, default: 1
-	#property :description,	String, :length => 120
-	property :created_at, 	DateTime
+	property :id,				Serial
+	property :url,				String, :length => 500, required: true
+	property :title,			String, :length => 120, required: true
+	property :num_favourites,	Integer, required: false, default: 1
+	#property :description,		String, :length => 120
+	property :created_at, 		DateTime
 
 	belongs_to :user
+	has n, :favourites
 end
+
+class Favourite
+	include DataMapper::Resource
+	property :id,			Serial
+	property :giver,		String
+	property :created_at, 	DateTime
+	belongs_to :link
+end
+
 
 
 configure :development do
@@ -330,14 +340,28 @@ end
 post "/:username/fav/:id" do
 	@user = User.get params[:username]
 	@link = @user.links.get params[:id]
+
 	puts @link.title
 
-	fav_count = @link.favourites
-	fav_count += 1
-
-	if @link.update(:favourites => fav_count)
-		# updated
+	if (@user && env['warden'].authenticate)
+		if @link.favourites.first(:giver => env['warden'].user.username) == nil
+			fav_count = @link.num_favourites
+			fav_count += 1
+			puts "User has not faved this yet"
+			Favourite.create(:giver => env['warden'].user.username, :link_id => params[:id], :created_at => Time.now)
+			if @link.update(:num_favourites => fav_count)
+				json "canFav" => true
+			end
+		else
+			fav_count = @link.num_favourites
+			fav_count -= 1
+			@link.update(:num_favourites => fav_count)
+			@link.favourites.first(:giver => env['warden'].user.username).destroy
+			puts "User has faved this already"
+			json "canFav" => false
+		end
 	end
+
 end
 
 

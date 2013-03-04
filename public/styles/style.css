@@ -350,8 +350,10 @@ html, body {
 	display: block;
 	background: url('../images/star.png');
 	background-repeat: no-repeat;
-	height: 25px;
+	background-position: 0 0;
 	width: 25px;
+	height: 25px;
+	background-size: 25px auto;
 }
 
 .short-fav a:hover{

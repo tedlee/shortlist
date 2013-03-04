@@ -2,10 +2,14 @@
 
 	<div class="log-entry">
 		<div class="log-date">
-			February 27th 2013
+			February 3rd 2013
 		</div>
 		<div class="log-description">
-			Today's developments might better be described as trying to find a needle in a haystack. I'd set out to implement user settings and a favouriting feature. I figured both would be fairly trivial to implement. The Ruby ORM DataMapper I'm using has an undocumented bug when migrating the database with new columns. After a good couple hours of debugging I realized that the old database columns were the root of the issue. With those removed things were back on track. I didn't get around to favouriting but settings are now fully implemented. 
+			There's no better time to ship features than Saturday night right? I finally implemented favouriting (Shortlist's API naturally follows Canadian spelling conventions eh!) tonight. Check out that little favourites icon in the bottom right hand corner of each Short. 
+			<br/><br/>
+			My initial implementation used an \<img\> tag with a (25px x 25px) icon embedded in a link tag that when clicked triggered a POST to the server. Functionally it worked great but I was unhappy with how the favourite icons looked as they seemed desaturated and blurry. After some research into best practices for icons I switched to using Retina (ie. images 2x their normal resolution) and CSS image sprites. The premise of CSS image sprites being that that instead of having multiple images in separate \<img\> tags you have one image that contains all the image assets. This limits the number of HTTP requests the client has to make — which turns out to take a a good percentage of the total time needed to render a page. After pushing the sprites to production I'm much happier with how they render. As I continue to add more features it becomes harder and harder to maintain a simple interface — one of my goals with Shortlist.
+			<br/><br/>
+			“A modern paradox is that it’s simpler to create complex interfaces because it’s so complex to simplify them.” — Pär Almqvist
 		</div>
 	</div>
 

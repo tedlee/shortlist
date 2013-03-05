@@ -28,7 +28,7 @@ class User
 	property :password,		BCryptHash
 	property :fullname, 	String
 	property :user_email,	String, format: :email_address  
-	property :user_avatar, 	Text, :format => :url, required: true
+	property :user_avatar, 	Text, :format => :url, default: "http://s3.amazonaws.com/shortlistapp/1362446767739default-avatar.png"
 	property :created_at, 	DateTime
 
 	def username= new_username
@@ -143,7 +143,12 @@ end
 post "/signup" do
 
 	# TODO - add username checking aginst existing usernames and forbidden phrases
-	User.create(:username => params[:username], :password => params[:password], :fullname => params[:fullname], :user_email => params[:user_email], :user_avatar => params[:user_avatar], :created_at => Time.now)
+
+	if params[:user_avatar] != ""
+		User.create(:username => params[:username], :password => params[:password], :fullname => params[:fullname], :user_email => params[:user_email], :user_avatar => params[:user_avatar], :created_at => Time.now)
+	else
+		User.create(:username => params[:username], :password => params[:password], :fullname => params[:fullname], :user_email => params[:user_email], :created_at => Time.now)
+	end
 
 	if env['warden'].authenticate
 		send_welcome_message(params[:user_email], params[:fullname])

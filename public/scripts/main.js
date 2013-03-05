@@ -11,10 +11,10 @@ $(document).ready(function () {
 
 function favThis(favObj) {
 
-	shortAuthor = $(favObj).parent().parent().children('.short-author').children('a:eq(1)').text();
+	shortAuthor = $(favObj).parent().parent().parent().children('#bottom-bar').children('.short-author').children('a:eq(1)').text();
 	console.log(shortAuthor);
 
-	shortID = $(favObj).parent().parent().children('.short-author').attr('title');
+	shortID = $(favObj).parent().parent().parent().children('#bottom-bar').children('.short-author').attr('title');
 	console.log(shortID);
 	if (makeRequest(shortAuthor, shortID) == true) {
 		console.log("Trying to increment count")

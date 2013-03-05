@@ -334,7 +334,7 @@ post "/:username/delete/:id" do
 	@link = @user.links.get params[:id]
 
 	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
-		if @link.destroy
+		if @link.favourites.destroy && @link.destroy
 			redirect "/#{ @user.username }"
 		else
 			redirect "/#{ @user.username }"

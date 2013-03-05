@@ -17,57 +17,53 @@
 		</div>
 	<% end %>
 
-	<div id="time-bar"> <div class="current-date"></div> </div>
+	<!-- <div id="time-bar"> <div class="current-date"></div> </div> -->
 	<% count = 1 %>
 	<% if @user.links %>
 		<% @user.links.reverse.each do |link| %>
-			<%=puts link.url %>
-				<div class="short-container">
-					<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
-						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
-					<% #Bug here that will catch all URLS that end in youtube.com and doesn't accept URLs with just "www." prefix %>
-					<% elsif link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/] %>
-						<%= youtube_embed(link.url) %>
-					<% elsif link.url[/(vimeo\.com\/)/] %>
-						<%= vimeo_embed(link.url) %>
-					<% elsif link.url[/(soundcloud\.com\/)/] %>
-						<% soudcloud_response = soundcloud_embed(link.url) %>
-						<% if soudcloud_response != "Soundcloud API is down" %>
-							<%= soudcloud_response %>
+			<div class="short-container">
+				<div id="short-details">
+					<div class="short-number"> <%= count %>.</div>
+					<div class="short-title"><a href="/<%= link.user_username %>/<%= link.id %>"> <%= link.title %> </a></div>
+
+					<div class="short-fav">
+						<div class="short-fav-count"><%= link.num_favourites %></div>
+						<% if (env['warden'].authenticate) %>
+							<% if link.favourites.first(:giver => env['warden'].user.username) == nil %>
+								<a href="javascript:void(0)" onclick="favThis(this);"></a>
+							<% else %>
+								<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
+							<% end %>
 						<% else %>
-							<div class="short-cover" style="background-image:url('http://f.cl.ly/items/3J3u0e1n1F1j382X2P0a/soundcloud-down.jpg'); height: 300px;"> </div>
+							<a href="javascript:void(0)"></a>
 						<% end %>
+					</div> 
+				</div>
+
+				<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
+					<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
+				<% elsif link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/] %>
+					<%= youtube_embed(link.url) %>
+				<% elsif link.url[/(vimeo\.com\/)/] %>
+					<%= vimeo_embed(link.url) %>
+				<% elsif link.url[/(soundcloud\.com\/)/] %>
+					<% soudcloud_response = soundcloud_embed(link.url) %>
+					<% if soudcloud_response != "Soundcloud API is down" %>
+						<%= soudcloud_response %>
 					<% else %>
-						<% puts "Non Vimeo Link!!" %>
-						<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
+						<div class="short-cover" style="background-image:url('http://f.cl.ly/items/3J3u0e1n1F1j382X2P0a/soundcloud-down.jpg'); height: 300px;"> </div>
 					<% end %>
-						<div id="short-details">
-							<div class="short-number"> <%= count %>.</div>
-							<div class="short-title"><a href="/<%= link.user_username %>/<%= link.id %>"> <%= link.title %> </a></div>
-
-							<div class="short-author" title="<%= link.id %>"> — <a href="<%= link.url %>">link</a> via <a href="/<%= link.user_username %>"><%= link.user_username %></a>.</div>
-							<div class="short-fav">
-								<% if (env['warden'].authenticate) %>
-									<% if link.favourites.first(:giver => env['warden'].user.username) == nil %>
-										<a href="javascript:void(0)" onclick="favThis(this);"></a>
-									<% else %>
-										<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
-									<% end %>
-								<% else %>
-									<a href="javascript:void(0)"></a>
-								<% end %>
-								<div class="short-fav-count"><%= link.num_favourites %></div>
-							</div> 
-						</div>
-
-				</div> 
-				<% count+=1 %>
-				<% break if count==50 %>
+				<% else %>
+					<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
+				<% end %>
+				<div id="bottom-bar">
+					<div class="short-author" title="<%= link.id %>"> — <a href="<%= link.url %>">link</a> via <a href="/<%= link.user_username %>"><%= link.user_username %></a>.</div>
+				</div>
+			</div> 
+			<% count+=1 %>
+			<% break if count==50 %>
 		<% end %>
 	<% end %>
-	<div id="bottom-bar" class="short-title" style="font-weight: 400">
-		Nothing to see here!
-	</div>
 </div>
 
 

@@ -195,16 +195,13 @@ html, body {
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 20px;
+	margin-top: 20px;
 	text-align: center;
 	padding-bottom: 2px;
 	padding-top: 10px;
 
 	display: block;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
-	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
-
+	border-radius: 8px;
 	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
 
 	background-image: url(../images/time-bar.jpg);

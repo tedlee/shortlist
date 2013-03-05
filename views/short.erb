@@ -22,6 +22,24 @@
 
 	<% if @user.links %>
 		<div class="short-container">
+
+			<div id="short-details">
+				<div class="short-title"><a href="/<%= @link.user_username %>/<%= @link.id %>"> <%= @link.title %> </a></div>
+
+				<div class="short-fav">
+					<div class="short-fav-count"><%= @link.num_favourites %></div>
+					<% if (env['warden'].authenticate) %>
+						<% if @link.favourites.first(:giver => env['warden'].user.username) == nil %>
+							<a href="javascript:void(0)" onclick="favThis(this);"></a>
+						<% else %>
+							<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
+						<% end %>
+					<% else %>
+						<a href="javascript:void(0)"></a>
+					<% end %>
+				</div> 
+			</div>
+
 			<% if %w[.png .jpg .gif .bmp].include? File.extname(@link.url) %>
 				<div class="short-cover" style="background-image:url('<%= @link.url %>')"></div>
 			<% elsif @link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/] %>
@@ -38,27 +56,14 @@
 			<% else %>
 				<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 			<% end %>
-			<div id="short-details">
-				<div class="short-title"><a href="/<%= @link.user_username %>/<%= @link.id %>"> <%= @link.title %> </a></div>
-
+			<div id="bottom-bar">
 				<div class="short-author" title="<%= @link.id %>"> — <a href="<%= @link.url %>">link</a> via <a href="/<%= @link.user_username %>"><%= @link.user_username %></a>.</div>
-				<div class="short-fav">
-					<% if (env['warden'].authenticate) %>
-						<% if @link.favourites.first(:giver => env['warden'].user.username) == nil %>
-							<a href="javascript:void(0)" onclick="favThis(this);"></a>
-						<% else %>
-							<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
-						<% end %>
-					<% else %>
-						<a href="javascript:void(0)"></a>
-					<% end %>
-					<div class="short-fav-count"><%= @link.num_favourites %></div>
-				</div> 
 			</div>
+
 		</div> 
 	<% end %>
 
-	<div id="add-bar" style="padding-bottom: 5px; border-top-left-radius: 0px; border-top-right-radius: 0px;">
+	<div id="add-bar" style="padding-bottom: 5px;">
 		<% if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username)) %>
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>

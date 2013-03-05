@@ -11,11 +11,10 @@
 				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:5px; margin-left: 5px; text-transform: none;" class="button" value="Add Link">
 			</form>
 		</div>
+		<h2 style="margin-bottom:20px; font-size: 32px; font-weight: 600; color: #656262;">Feed</h2>
 	<% end %>
 
-	<h2 style="margin-bottom:20px; font-size: 32px; font-weight: 600; color: #656262;">Feed</h2>
-
-	<div id="time-bar"> <div class="current-date"></div> </div>
+	<!-- <div id="time-bar"> <div class="current-date"></div> </div> -->
 	<% count = 1 %>
 	<% if @links %>
 		<% @links.reverse.each do |link| %>

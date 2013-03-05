@@ -170,10 +170,9 @@ html, body {
 	text-align: center;
 
 	display: block;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
+	border-radius: 8px;
 
-	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
+
 
 	/*
 	-webkit-box-shadow: 0 2px 6px #777;
@@ -182,7 +181,7 @@ html, body {
 	*/	
 
 	border-color: rgb(57, 57, 57);
-	border-bottom-width: 1px;
+	border-width: 1px;
 	border-style: solid;
 
 	background-image: url(../images/time-bar.jpg);
@@ -214,24 +213,17 @@ html, body {
 }
 
 #bottom-bar {
-	width: 100%;
-	min-height: 10px;
-	margin-right: auto;
-	margin-left: auto;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-
 	display: block;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: 'Open Sans', sans-serif;
+	height: 30px;
+	line-height: 30px;
+	border-color: rgb(57, 57, 57);
+	border-top-width: 2px;
+	border-style: solid;
+	margin-top: -3px;
 
-	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
-
-	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
-
-	background-image: url(../images/time-bar.jpg);
-	background-position: 0px -1px;
-	background-repeat: repeat-x;
 }
 
 .current-date {
@@ -249,9 +241,10 @@ html, body {
 .short-container {
 	background-color: white;
 	border-color: rgb(57, 57, 57);
-	border-left-width: 1px;
-	border-right-width: 1px;
+	border-width: 1px;
 	border-style: solid;
+	border-radius: 10px;
+	margin-top: 15px;
 }
 
 .short-cover {
@@ -265,7 +258,6 @@ html, body {
 	border-bottom-color: rgb(57, 57, 57);
 	border-bottom-width: 1px;
 	border-style: solid;
-
 }
 
 #short-details {
@@ -275,17 +267,17 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 	padding-top: 15px;
 	padding-bottom: 35px;
-	border-color: rgb(57, 57, 57);
-	border-bottom-width: 5px;
-	border-style: solid;
 	height: 100%;
 	padding-left: 5px;
+	border-color: rgb(57, 57, 57);
+	border-bottom-width: 2px;
+	border-style: solid;
 }
 
 .short-author {
 	display: inline-block;
-	float: left;
-	margin-left: 10px;
+	float: right;
+	margin-right: 15px;
 }
 
 .short-author a{
@@ -329,31 +321,29 @@ html, body {
 }
 
 .short-fav {
-	height: 50px;
 	float: right;
 	display: inline-block;
-	margin-right: 10px;
-	margin-top: -10px;
-	text-align: center;
-}
-
-.short-fav img{
-	width: 25px;
-	height: 25px;
-	margin-bottom: -2px;
+	margin-top: -14px;
+	position: relative;
+	width: 50px;
 }
 
 .short-fav a{
 	text-decoration: none;
 	text-indent: -9000px;
 
-	display: block;
+	display: inline-block;
 	background: url('../images/star.png');
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	width: 25px;
 	height: 25px;
 	background-size: 25px auto;
+	position: absolute;
+	float: right;
+	top: 50%;
+	margin-top: 12.5px;
+	margin-left: 15px;
 }
 
 .short-fav a:hover{
@@ -361,9 +351,14 @@ html, body {
 }
 
 .short-fav-count{
-	display: block;
-	font-size: 0.75em;
+	display: inline-block;
+	font-size: 18px;
 	font-weight: 700;
+	position: absolute;
+	text-align: right;
+	vertical-align: middle;
+	height: 50px;
+	line-height: 50px
 }
 
 .button {

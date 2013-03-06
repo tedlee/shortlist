@@ -1,7 +1,17 @@
 
 <div id="hero" style="background-image:url('../images/nyc-wood-bg.jpg')">
 	<!-- <img src='../images/ted.jpg' class="avatar"> -->
-	<a href="/<%= @user.username %>"><img src="<%= @user.user_avatar %>" class="avatar"></a>
+	<div class="profile-name"><%= @user.fullname %></div>
+	<a href="/<%= @user.username %>">
+		<div style="background-image:url('<%= @user.user_avatar %>')" class="avatar"></div>
+		<% if @user.faves_received > 1 %>
+			<div class="profile-faves-received"><span style="font-weight:600"><%= @user.faves_received %></span> Faves</div>
+		<% elsif @user.faves_received == 1 %>
+			<div class="profile-faves-received"><span style="font-weight:600">1</span> Favourite</div>
+		<% else %>
+			<div class="profile-faves-received"><span style="font-weight:600">0</span> Favourites</div>
+		<% end %>
+	</a>
 	<div class="hero-marker"></div> 
 </div>
 

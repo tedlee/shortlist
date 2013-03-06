@@ -27,8 +27,9 @@ class User
 	property :username,		String, required: true, unique: true, :key => true
 	property :password,		BCryptHash
 	property :fullname, 	String
-	property :user_email,	String, format: :email_address  
+	property :user_email,	String, format: :email_address
 	property :user_avatar, 	Text, :format => :url, default: "http://s3.amazonaws.com/shortlistapp/1362446767739default-avatar.png"
+	property :faves_received, Integer, default: 0
 	property :created_at, 	DateTime
 
 	def username= new_username
@@ -350,17 +351,16 @@ post "/:username/fav/:id" do
 
 	if (@user && env['warden'].authenticate)
 		if @link.favourites.first(:giver => env['warden'].user.username) == nil
-			fav_count = @link.num_favourites
-			fav_count += 1
 			puts "User has not faved this yet"
 			Favourite.create(:giver => env['warden'].user.username, :link_id => params[:id], :created_at => Time.now)
-			if @link.update(:num_favourites => fav_count)
+			if @link.update(:num_favourites => (@link.num_favourites + 1)) && @user.update(:faves_received => (@user.faves_received + 1))
 				json "canFav" => true
 			end
 		else
-			fav_count = @link.num_favourites
-			fav_count -= 1
-			@link.update(:num_favourites => fav_count)
+			if @user.faves_received > 0
+				@user.update(:faves_received => (@user.faves_received - 1))
+			end
+			@link.update(:num_favourites => (@link.num_favourites - 1))
 			@link.favourites.first(:giver => env['warden'].user.username).destroy
 			puts "User has faved this already"
 			json "canFav" => false

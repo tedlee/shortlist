@@ -27,7 +27,7 @@
 
 <script>
 
-$(function() {
+window.onload=function(){
 	$("input:file").change(function (){
 		var file_extension = $("input:file").val().split('.').pop().toLowerCase();
 		if ($.inArray(file_extension, ['gif','png','jpg', 'bmp', 'jpeg']) > 0) {
@@ -69,6 +69,6 @@ $(function() {
 			}else {alert("Whoa that's a big file! To keep things fast we limit profile photo sizes to under 1 MB.")}
 		}else {alert("Sure that's the right file? We don't support that kind of file.")}
 	});
-});
+};
 
 </script>

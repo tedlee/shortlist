@@ -2,7 +2,11 @@
 <div id="hero" style="background-image:url('../images/nyc-wood-bg.jpg')">
 	<!-- <img src='../images/ted.jpg' class="avatar"> -->
 	<div class="profile-name"><%= @user.fullname %></div>
-	<a href="/<%= @user.username %>">
+	<% if (env['warden'].authenticate) && (@user.id == env['warden'].user.id) %>
+		<a href="/settings">
+	<% else %>
+		<a href="/<%= @user.username %>">
+	<% end %>
 		<div style="background-image:url('<%= @user.user_avatar %>')" class="avatar"></div>
 		<% if @user.faves_received > 1 %>
 			<div class="profile-faves-received"><span style="font-weight:600"><%= @user.faves_received %></span> Faves</div>
@@ -16,9 +20,8 @@
 </div>
 
 <div id="shorts">
-	<% if (env['warden'].authenticate) && (@user.username == env['warden'].user.username) %>
+	<% if (env['warden'].authenticate) && (@user.id == env['warden'].user.id) %>
 		<div id="add-bar">
-			<% puts env['warden'].user.username %>
 			<form action="/<%= env['warden'].user.username %>/add" method="post">
 				<input type="url" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
 				<input type="text" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="title" placeholder="Title" autocomplete="off"/>

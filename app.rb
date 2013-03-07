@@ -23,14 +23,15 @@ class User
 	# Note: when adding new fields you can't require them immediately because the migration thinks that that field
 	# should have a value (and for all instances of the User class they do not)
 
-	#property :id, 			Serial
-	property :username,		String, required: true, unique: true, :key => true
-	property :password,		BCryptHash
-	property :fullname, 	String
-	property :user_email,	String, format: :email_address
-	property :user_avatar, 	Text, :format => :url, default: "http://s3.amazonaws.com/shortlistapp/1362446767739default-avatar.png"
-	property :faves_received, Integer, default: 0
-	property :created_at, 	DateTime
+	property :id, 				Serial
+	property :username,			String, required: true, unique: true
+	property :password,			BCryptHash
+	property :fullname,			String
+	property :user_email,		String, format: :email_address
+	property :user_avatar,		Text, :format => :url, default: "http://s3.amazonaws.com/shortlistapp/1362446767739default-avatar.png"
+	property :faves_received,	Integer, default: 0
+	property :updated_at,		DateTime, required: false
+	property :created_at, 		DateTime
 
 	def username= new_username
 		super new_username.downcase
@@ -74,7 +75,7 @@ end
 
 
 configure :development do
-	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist")
+	DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/shortlist3")
 	DataMapper.auto_upgrade!
 	#DataMapper.auto_migrate! # wipes everything
 	DataMapper.finalize
@@ -103,7 +104,8 @@ end
 
 Warden::Manager.serialize_from_session do |username|
 	puts '[INFO] serialize from session'
-	User.get(username)
+	#User.get(username)
+	User.first(:username => username)
 end
 
 Warden::Strategies.add(:password) do
@@ -217,13 +219,14 @@ get '/signS3put' do
 end
 
 post "/:username/add" do
-	@user = User.get params[:username]
+	#@user = User.get params[:username]
+	@user = User.get(env['warden'].user.id)
 
-	puts "username submitted is: #{@user.username}"
+	puts "username submitted is: #{@user.username} and id is: #{@user.id}"
 
 	# Checks to make sure that person is signed in before submitting link
-	if (@user && env['warden'].authenticate) && @user.username == env['warden'].user.username
-		Link.create(:url => params[:url], :title => params[:title], :user_username => @user.username, :created_at => Time.now)
+	if (@user && env['warden'].authenticate) && @user.id == env['warden'].user.id
+		Link.create(:url => params[:url], :title => params[:title], :user_id => @user.id, :created_at => Time.now)
 		redirect back
 	else
 		redirect back
@@ -232,8 +235,9 @@ end
 
 get "/settings" do
 
-	if (env['warden'].authenticate) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
-		@user = User.get(env['warden'].user.username)
+	if (env['warden'].authenticate) #|| ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+		#@user = User.get(env['warden'].user.username)
+		@user = User.get(env['warden'].user.id)
 		@display_nav_avatar = false
 		@title = "Settings"
 		erb :settings
@@ -243,11 +247,17 @@ get "/settings" do
 end
 
 post "/settings" do
-	@user = User.get(env['warden'].user.username)
+	@user = User.get(env['warden'].user.id)
+	previous_username = @user.username
 
-	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+	if ((env['warden'].authenticate) && (@user.id == env['warden'].user.id)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
 		if @user.update(:username => params[:username], :fullname => params[:fullname], :user_email => params[:user_email], :user_avatar => params[:user_avatar])
-			redirect "/#{env['warden'].user.username}"
+			if previous_username == params[:username]
+				redirect "/#{env['warden'].user.username}"
+			else
+				env['warden'].logout
+				redirect '/'
+			end
 		else
 			redirect back
 		end
@@ -255,20 +265,21 @@ post "/settings" do
 end
 
 get "/:username" do
-	@user = User.get params[:username]
+	#@user = User.get params[:username]
+	@user = User.first(:username => params[:username])
 
 	# @links = Link.all(:user_username => @user.username)
 	# To get all the links from a user do @user.links.all()
 	# @user.respond_to?(:value)
 
 	if @user
-		if (env['warden'].authenticate) && (@user.username != env['warden'].user.username)
+		if (env['warden'].authenticate) && (@user.id != env['warden'].user.id)
 			@display_nav_avatar = true
 		else
 			@display_nav_avatar = false
 		end
 
-		@title = "The Shortlist of #{@user.username}"
+		@title = "The Shortlist of #{@user.fullname}"
 		erb :user
 	else
 		"That user doesn't exist yet :("
@@ -296,7 +307,8 @@ get "/api/avatars" do
 end
 
 get "/:username/:id" do
-	@user = User.get params[:username]
+	#@user = User.get params[:username]
+	@user = User.first(:username => params[:username])
 	@link = @user.links.get params[:id]
 
 	#@links = Link.all(:user_username => @user.username)
@@ -304,13 +316,13 @@ get "/:username/:id" do
 	# To get all the links from a user do @user.links.all()
 
 	if @user && @link
-		if (env['warden'].authenticate) &&(@user.username != env['warden'].user.username)
+		if (env['warden'].authenticate) && (@user.id != env['warden'].user.id)
 			@display_nav_avatar = true
 		else
 			@display_nav_avatar = false
 		end
 
-		@title = "The Shortlist of #{@user.username}"
+		@title = "The Shortlist of #{@user.fullname}"
 		erb :short
 	else
 		"That Short doesn't exist :("
@@ -318,10 +330,11 @@ get "/:username/:id" do
 end
 
 post "/:username/edit/:id" do
-	@user = User.get params[:username]
+	#@user = User.get params[:username]
+	@user = User.get(env['warden'].user.id)
 	@link = @user.links.get params[:id]
 
-	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+	if ((env['warden'].authenticate) && (@user.id == env['warden'].user.id)) #|| ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
 		if @link.update(:url => params[:url], :title => params[:title])
 			redirect back
 		else
@@ -331,10 +344,10 @@ post "/:username/edit/:id" do
 end
 
 post "/:username/delete/:id" do
-	@user = User.get params[:username]
+	@user = User.get(env['warden'].user.id)
 	@link = @user.links.get params[:id]
 
-	if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
+	if ((env['warden'].authenticate) && (@user.id == env['warden'].user.id)) #|| ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username))
 		if @link.favourites.destroy && @link.destroy
 			redirect "/#{ @user.username }"
 		else
@@ -343,16 +356,17 @@ post "/:username/delete/:id" do
 	end
 end
 
-post "/:username/fav/:id" do
-	@user = User.get params[:username]
-	@link = @user.links.get params[:id]
+post "/fav/:id" do
+	#@user = User.first(:username => params[:username])
+	@link = Link.get params[:id]
+	@user = User.get(@link.user_id)
 
 	puts @link.title
 
-	if (@user && env['warden'].authenticate)
-		if @link.favourites.first(:giver => env['warden'].user.username) == nil
+	if (@link && env['warden'].authenticate)
+		if @link.favourites.first(:giver => env['warden'].user.id) == nil
 			puts "User has not faved this yet"
-			Favourite.create(:giver => env['warden'].user.username, :link_id => params[:id], :created_at => Time.now)
+			Favourite.create(:giver => env['warden'].user.id, :link_id => params[:id], :created_at => Time.now)
 			if @link.update(:num_favourites => (@link.num_favourites + 1)) && @user.update(:faves_received => (@user.faves_received + 1))
 				json "canFav" => true
 			end
@@ -361,7 +375,7 @@ post "/:username/fav/:id" do
 				@user.update(:faves_received => (@user.faves_received - 1))
 			end
 			@link.update(:num_favourites => (@link.num_favourites - 1))
-			@link.favourites.first(:giver => env['warden'].user.username).destroy
+			@link.favourites.first(:giver => env['warden'].user.id).destroy
 			puts "User has faved this already"
 			json "canFav" => false
 		end
@@ -372,7 +386,7 @@ end
 
 
 not_found do  
-	halt 404, 'No page for you.'  
+	halt 404, 'No page for you. This is just like that episode with the Soup Nazi except on the web.'  
 end
 
 

@@ -18,31 +18,21 @@
 <div id="shorts">
 	<div id="time-bar"> <div class="current-date"><%= @link.created_at %></div> </div>
 
-	<%
-
-	def check_website_url(website_url)
-		if website_url[/^h?t?t?p?s?:?\/?\/?w?w?w?\.?(.*\.[A-Z\/]{2,})$/i]
-			website_id = $1
-		end
-
-		%Q{#{ website_id }}
-	end
-
-	%>
 
 	<% if @user.links %>
+		<% link_username = User.get(@link.user_id).username %>
 		<div class="short-container">
 
 			<div id="short-details">
-				<div class="short-title"><a href="/<%= @link.user_username %>/<%= @link.id %>"> <%= @link.title %> </a></div>
+				<div class="short-title"><a href="/<%= @link_username %>/<%= @link.id %>"> <%= @link.title %> </a></div>
 
 				<div class="short-fav">
 					<div class="short-fav-count"><%= @link.num_favourites %></div>
 					<% if (env['warden'].authenticate) %>
-						<% if @link.favourites.first(:giver => env['warden'].user.username) == nil %>
-							<a href="javascript:void(0)" onclick="favThis(this);"></a>
+						<% if @link.favourites.first(:giver => env['warden'].user.id) == nil %>
+							<a href="javascript:void(0)" data-shortid="<%= @link.id %>" onclick="favThis(this);"></a>
 						<% else %>
-							<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
+							<a href="javascript:void(0)" data-shortid="<%= @link.id %>" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
 						<% end %>
 					<% else %>
 						<a href="javascript:void(0)"></a>
@@ -67,7 +57,7 @@
 				<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 			<% end %>
 			<div id="bottom-bar">
-				<div class="short-author" title="<%= @link.id %>"> — <a href="<%= @link.url %>">link</a> via <a href="/<%= @link.user_username %>"><%= @link.user_username %></a>.</div>
+				<div class="short-author" title="<%= @user.fullname %>"> — <a href="<%= @link.url %>">link</a> via <a href="/<%= link_username %>"><%= @user.fullname %></a>.</div>
 			</div>
 
 		</div> 

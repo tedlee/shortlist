@@ -57,6 +57,7 @@ class Link
 	property :url,				String, :length => 500, required: true
 	property :title,			String, :length => 120, required: true
 	property :num_favourites,	Integer, required: false, default: 1
+	property :user_id,			Integer, required: false
 	#property :description,		String, :length => 120
 	property :created_at, 		DateTime
 

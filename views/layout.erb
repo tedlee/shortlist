@@ -24,7 +24,7 @@
 						<!-- When user is signed in -->
 						<div class="left-logo animate-title"><a href="/">Shortlist</a></div>
 						<% if @display_nav_avatar == true %>
-							<a href="/<%= env['warden'].user.username %>"><div style="background-image:url('<%= User.get(env['warden'].user.username).user_avatar %>')" class="nav-avatar"></div></a>
+							<a href="/<%= env['warden'].user.username %>"><div style="background-image:url('<%= User.get(env['warden'].user.id).user_avatar %>')" class="nav-avatar"></div></a>
 						<% end %>
 						<div class="right-button"><a href="/settings">Settings</a></div>
 						<div class="right-button"><a href="/logout">Logout</a></div>
@@ -89,10 +89,10 @@
 	<script id="IntercomSettingsScriptTag">
 	  window.intercomSettings = {
 	    // TODO: The current logged in user's email address.
-	    email: "<%= User.get(env['warden'].user.username).user_email %>",
+	    email: "<%= User.get(env['warden'].user.id).user_email %>",
 	    // TODO: The current logged in user's sign-up date as a Unix timestamp.
-	    created_at: <%= User.get(env['warden'].user.username).created_at.to_time.to_i %>,
-	    name: "<%= User.get(env['warden'].user.username).fullname %>",
+	    created_at: <%= User.get(env['warden'].user.id).created_at.to_time.to_i %>,
+	    name: "<%= User.get(env['warden'].user.id).fullname %>",
 	    app_id: "de51b166ca470bd2d22be7a5f63aa810b8440eda"
 	  };
 	</script>

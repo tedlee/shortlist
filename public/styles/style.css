@@ -345,7 +345,7 @@ html, body {
 }
 
 .short-fav a:hover{
-	background-position: 0 -25px;
+	background-position: 0 -25px !important;
 }
 
 .short-fav-count{

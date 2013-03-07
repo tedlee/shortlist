@@ -3,7 +3,7 @@
 <div id="shorts">
 	<% if (env['warden'].authenticate) %>
 		<div id="add-bar">
-			<% puts env['warden'].user.username %>
+			<% puts env['warden'].user.id %>
 
 			<form action="/<%= env['warden'].user.username %>/add" method="post">
 				<input type="url" style="margin-top: 0px; margin-left: 5px;" class="link-input" name="url" placeholder="Link (Image or YouTube)" autocomplete="off"/>
@@ -18,19 +18,19 @@
 	<% count = 1 %>
 	<% if @links %>
 		<% @links.reverse.each do |link| %>
-
+				<% link_username = User.get(link.user_id).username %>
 				<div class="short-container">
 					<div id="short-details">
 						<div class="short-number"> <%= count %>.</div>
-						<div class="short-title"><a href="/<%= link.user_username %>/<%= link.id %>"> <%= link.title %> </a></div>
+						<div class="short-title"><a href="/<%= link_username %>/<%= link.id %>"> <%= link.title %> </a></div>
 
 						<div class="short-fav">
 							<div class="short-fav-count"><%= link.num_favourites %></div>
 							<% if (env['warden'].authenticate) %>
-								<% if link.favourites.first(:giver => env['warden'].user.username) == nil %>
-									<a href="javascript:void(0)" onclick="favThis(this);"></a>
+								<% if link.favourites.first(:giver => env['warden'].user.id) == nil %>
+									<a href="javascript:void(0)" data-shortid="<%= link.id %>" onclick="favThis(this);"></a>
 								<% else %>
-									<a href="javascript:void(0)" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
+									<a href="javascript:void(0)" data-shortid="<%= link.id %>" style="background-position: 0 -25px;" onclick="favThis(this);"></a>
 								<% end %>
 							<% else %>
 								<a href="javascript:void(0)"></a>
@@ -55,7 +55,7 @@
 						<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 					<% end %>
 					<div id="bottom-bar">
-						<div class="short-author" title="<%= link.id %>"> — <a href="<%= link.url %>">link</a> via <a href="/<%= link.user_username %>"><%= link.user_username %></a>.</div>
+						<div class="short-author" title="<%= link.id %>"> — <a href="<%= link.url %>">link</a> via <a href="/<%= User.get(link.user_id).username %>"><%= User.get(link.user_id).fullname %></a>.</div>
 					</div>
 				</div> 
 				<% count+=1 %>

@@ -63,8 +63,8 @@
 		</div> 
 	<% end %>
 
-	<div id="add-bar" style="padding-bottom: 5px;">
-		<% if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username)) %>
+	<% if ((env['warden'].authenticate) && (@user.username == env['warden'].user.username)) || ((env['warden'].authenticate) && (ENV['ADMIN_USERNAME'] == env['warden'].user.username)) %>
+		<div id="add-bar" style="padding-bottom: 5px;">
 			<% puts env['warden'].user.username %>
 			<% puts @user.username %>
 			<form style="display: inline-block;" action="/<%= @user.username %>/edit/<%= @link.id %>" method="post">
@@ -75,8 +75,8 @@
 			<form style="display: inline-block;" action="/<%= @user.username %>/delete/<%= @link.id %>" method="post">
 				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:0px; margin-left: 5px; text-transform: none;" class="button" value="Remove Short">
 			</form>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
 </div>
 
 

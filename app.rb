@@ -68,7 +68,7 @@ end
 class Favourite
 	include DataMapper::Resource
 	property :id,			Serial
-	property :giver,		String
+	property :giver,		Integer, default: 0
 	property :created_at, 	DateTime
 	belongs_to :link
 end

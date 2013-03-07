@@ -42,12 +42,12 @@
 
 <script>
 
-$(function() {
+window.onload=function(){
 	$("input:file").change(function (){
 		var file_extension = $("input:file").val().split('.').pop().toLowerCase();
 		if ($.inArray(file_extension, ['gif','png','jpg', 'bmp', 'jpeg']) > 0) {
 			if (this.files[0].size < 1048576) {
-				
+
 				var s3upload = s3upload != null ? s3upload : new S3Upload({
 					file_dom_selector: 'input[type=file]',
 		 			s3_sign_put_url: '/signS3put',
@@ -62,8 +62,20 @@ $(function() {
 						$('.upload-button').text('Done!');
 						$('input[name="user_avatar"]').val(public_url)
 
-						$('.avatar').css("background-image", "url(" + public_url +")");
-						$('.nav-avatar').css("background-image", "url(" + public_url +")"); 
+						if ($('.animate-avatar').length) {
+							$('.animate-avatar').remove();
+							jQuery('<div/>', {
+								id: 'foo',
+								class: 'nav-avatar animate-avatar',
+								style: 'background-image:url("' + public_url + '")',
+							}).insertAfter('.left-logo');
+						} else {
+							jQuery('<div/>', {
+								id: 'foo',
+								class: 'nav-avatar animate-avatar',
+								style: 'background-image:url("' + public_url + '")',
+							}).insertAfter('.left-logo');
+						}
 					},
 					onError: function(status) {
 						console.log('Upload error: ', status);
@@ -72,7 +84,7 @@ $(function() {
 			}else {alert("Whoa that's a big file! To keep things fast we limit profile photo sizes to under 1 MB.")}
 		}else {alert("Sure that's the right file? We don't support that kind of file.")}
 	});
-});
+};
 
 </script>
 

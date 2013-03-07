@@ -11,12 +11,14 @@ $(document).ready(function () {
 
 function favThis(favObj) {
 
-	shortAuthor = $(favObj).parent().parent().parent().children('#bottom-bar').children('.short-author').children('a:eq(1)').text();
-	console.log(shortAuthor);
+	//shortAuthor = $(favObj).parent().parent().parent().children('#bottom-bar').children('.short-author').children('a:eq(1)').text();
+	//console.log(shortAuthor);
 
-	shortID = $(favObj).parent().parent().parent().children('#bottom-bar').children('.short-author').attr('title');
-	console.log(shortID);
-	if (makeRequest(shortAuthor, shortID) == true) {
+	//shortID = $(favObj).parent().parent().parent().children('#bottom-bar').children('.short-author').attr('title');
+	var shortID = $(favObj).data('shortid');
+	console.log("Short id is: " + shortID);
+
+	if (makeRequest(shortID) == true) {
 		console.log("Trying to increment count")
 		changeFav(favObj, "increment");
 		
@@ -28,8 +30,8 @@ function favThis(favObj) {
 
 };
 
-function makeRequest(shortAuthor, shortID) {
-	var requestURL = "/" + shortAuthor + "/fav/" + shortID;
+function makeRequest(shortID) {
+	var requestURL = "/fav/" + shortID;
 	console.log("Query being made for: "+ requestURL)
 	var canFav = false;
 

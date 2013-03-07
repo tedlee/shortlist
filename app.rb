@@ -23,7 +23,7 @@ class User
 	# Note: when adding new fields you can't require them immediately because the migration thinks that that field
 	# should have a value (and for all instances of the User class they do not)
 
-	property :id, 				Serial
+	property :id, 				Serial, require: false
 	property :username,			String, required: true, unique: true
 	property :password,			BCryptHash
 	property :fullname,			String

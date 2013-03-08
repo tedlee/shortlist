@@ -57,7 +57,12 @@
 				<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
 			<% end %>
 			<div id="bottom-bar">
-				<div class="short-author" title="<%= @user.fullname %>"> — <a href="<%= @link.url %>">link</a> via <a href="/<%= link_username %>"><%= @user.fullname %></a>.</div>
+				<div class="short-author" title="<%= @link.id %>"> — <a href="<%= @link.url %>">link</a> via
+				<% if @user.fullname != "" %>
+					<a href="/<%= link_username %>"><%= @user.fullname %></a>.</div>
+				<% else %>
+					<a href="/<%= link_username %>"><%= @user.username %></a>.</div>
+				<% end %>
 			</div>
 
 		</div> 

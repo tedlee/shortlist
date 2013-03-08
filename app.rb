@@ -58,6 +58,8 @@ class Link
 	property :title,			String, :length => 120, required: true
 	property :num_favourites,	Integer, required: false, default: 1
 	property :user_id,			Integer, required: false
+	property :media_type,		Enum[ :video, :music, :article, :picture, :gif, :misc ], :default => :misc
+	property :site_type,		Enum[ :youtube, :vimeo, :soundcloud, :misc ], :default => :misc
 	#property :description,		String, :length => 120
 	property :created_at, 		DateTime
 
@@ -227,7 +229,24 @@ post "/:username/add" do
 
 	# Checks to make sure that person is signed in before submitting link
 	if (@user && env['warden'].authenticate) && @user.id == env['warden'].user.id
-		Link.create(:url => params[:url], :title => params[:title], :user_id => @user.id, :created_at => Time.now)
+		@link = Link.create(:url => params[:url], :title => params[:title], :user_id => @user.id, :created_at => Time.now)
+
+		if %w[.png .jpg .gif .bmp].include? File.extname(@link.url)
+			@link.update(:media_type => :picture, :site_type => :misc)
+		elsif %w[.gif].include? File.extname(@link.url)
+			@link.update(:media_type => :gif, :site_type => :misc)
+		elsif @link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/]
+			@link.update(:media_type => :video, :site_type => :youtube)
+		elsif @link.url[/(vimeo\.com\/)/]
+			@link.update(:media_type => :video, :site_type => :vimeo)
+		elsif @link.url[/(soundcloud\.com\/)/]
+			@link.update(:media_type => :music, :site_type => :soundcloud)
+		elsif @link.url[/(atlantic\.com\/)/]
+			@link.update(:media_type => :article, :site_type => :misc)
+		else
+			@link.update(:media_type => :misc, :site_type => :misc)
+		end
+
 		redirect back
 	else
 		redirect back

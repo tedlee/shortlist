@@ -74,24 +74,6 @@
 					<div class="short-author" title="<%= User.get(link.user_id).fullname %>"> — <a href="<%= link.url %>">link</a> via <a href="/<%= link_username %>"><%= User.get(link.user_id).fullname %></a>.</div>
 				</div>
 			</div> 
-			<%
-			if %w[.png .jpg .gif .bmp].include? File.extname(link.url)
-				link.update(:media_type => :picture, :site_type => :misc)
-			elsif %w[.gif].include? File.extname(link.url)
-				link.update(:media_type => :gif, :site_type => :misc)
-			elsif link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/]
-				link.update(:media_type => :video, :site_type => :youtube)
-			elsif link.url[/(vimeo\.com\/)/]
-				link.update(:media_type => :video, :site_type => :vimeo)
-			elsif link.url[/(soundcloud\.com\/)/]
-				link.update(:media_type => :music, :site_type => :soundcloud)
-			elsif link.url[/(atlantic\.com\/)/]
-				link.update(:media_type => :article, :site_type => :misc)
-			else
-				link.update(:media_type => :misc, :site_type => :misc)
-			end
-			%>
-
 			<% count+=1 %>
 			<% break if count==50 %>
 		<% end %>

@@ -53,7 +53,6 @@ html, body {
 	border-bottom-width: 2px;
 	border-style: solid;
 	width: 100%;
-	min-width: 640px;
 }
 
 #inner-navbar{
@@ -61,6 +60,7 @@ html, body {
 	height: 70px;
 	margin-right: auto;
 	margin-left: auto;
+	max-width: 1200px;
 
 	/* Neat little trick to vertically align text
 	set line-height to the parents height */

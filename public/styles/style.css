@@ -236,6 +236,42 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.menu-underline {
+	font-weight: 800;
+	text-transform: uppercase;
+	font-size: 0.7em;
+	width: 355px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 40px;
+	letter-spacing: 1.0px;
+}
+
+.menu-underline ul {
+	padding: 6px 0 7px 0;
+	margin: 0;
+	text-align: left;
+}
+
+.menu-underline ul li {
+	display: inline;
+}
+
+.menu-underline ul li a{
+	color: #656262;
+	padding: 6px 3px 4px 3px;
+	text-decoration: none;
+	border-bottom: 3px solid gray
+}
+
+.menu-underline ul li:not(:last-child){
+	margin-right: 20px;
+}
+
+.menu-underline ul li a:hover, .menu-underline ul li a.selected{
+	border-bottom-color: #EB5858; 
+}
+
 .short-container {
 	background-color: white;
 	border-color: rgb(57, 57, 57);

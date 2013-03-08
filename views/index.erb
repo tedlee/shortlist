@@ -1,6 +1,7 @@
 <!-- Main Page Here -->
 
 <div id="shorts">
+	<!--
 	<% if (env['warden'].authenticate) %>
 		<div id="add-bar">
 			<% puts env['warden'].user.id %>
@@ -11,7 +12,24 @@
 				<input type="submit" style="width: 180px; padding-top: 0px; padding-bottom: 2px; margin-top:5px; margin-left: 5px; text-transform: none;" class="button" value="Add Link">
 			</form>
 		</div>
-		<h2 style="margin-bottom:20px; font-size: 32px; font-weight: 600; color: #656262;">Feed</h2>
+		<h2 style="margin-bottom:20px; font-size: 32px; font-weight: 600; color: #656262;">Feed</h2> -->
+		<div class="menu-underline" data-selected-item="<%= @category %>">
+			<ul>
+				<li><a href="/">All</a></li>
+				<li><a href="/category/videos">Videos</a></li>
+				<li><a href="/category/articles">Articles</a></li>
+				<li><a href="/category/music">Music</a></li>
+				<li><a href="/category/pictures">Pictures</a></li>
+			</ul>
+		</div>
+		<script>
+			//var category = $(".menu-underline").data('selected-item')
+			//console.log(category);
+			//if (category == "videos"){
+				//$("menu-underline").children("a:eq(1)").css("border-bottom-color", "#EB5858");
+			//}
+		</script>
+
 	<% end %>
 
 	<!-- <div id="time-bar"> <div class="current-date"></div> </div> -->

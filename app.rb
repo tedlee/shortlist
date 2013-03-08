@@ -455,28 +455,30 @@ end
 
 def soundcloud_embed(soundcloud_url)
 
-	require 'uri'
-	require 'net/http'
-	require 'json'
+	#require 'uri'
+	#require 'net/http'
+	#require 'json'
 
 	soundcloud_url.gsub(/(https?:\/\/)?(www.)?soundcloud\.com\/.*/) do |match|
 		new_uri = match.to_s
-		new_uri = (new_uri =~ /^https?\:\/\/.*/) ? URI(new_uri) : URI("http://#{new_uri}")
-		new_uri.normalize!
+		# new_uri = (new_uri =~ /^https?\:\/\/.*/) ? URI(new_uri) : URI("http://#{new_uri}")
+		# new_uri.normalize!
 
-		uri = URI("http://soundcloud.com/oembed")
-		params = {:format => 'json', :url => new_uri}.merge(:maxwidth => '', :maxheight => '500', :auto_play => false, :show_comments => false)
+		# uri = URI("http://soundcloud.com/oembed")
+		# params = {:format => 'json', :url => new_uri}.merge(:maxwidth => '', :maxheight => '500', :auto_play => false, :show_comments => false)
 		
-		uri.query = params.collect { |k,v| "#{k}=#{URI.escape(v.to_s)}" }.join('&')
+		# uri.query = params.collect { |k,v| "#{k}=#{URI.escape(v.to_s)}" }.join('&')
 		
-		begin
-			response = Net::HTTP.get(uri)
-		rescue Errno::ETIMEDOUT
-			puts "Can't make request to Soundcloud oembed API"
-		end
+		# begin
+		# 	response = Net::HTTP.get(uri)
+		# rescue Errno::ETIMEDOUT
+		# 	puts "Can't make request to Soundcloud oembed API"
+		# end
+
 
 		if (response != nil) && (response != "")
-			JSON.parse(response)["html"]
+			#JSON.parse(response)["html"]
+			%Q{<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=#{new_uri}&show_artwork=true&maxwidth=&maxheight=500&auto_play=false&show_comments=false"></iframe>}
 		else
 			"Soundcloud API is down"
 		end

@@ -296,7 +296,7 @@ get "/category/:name" do
 		@links = Link.all(:media_type => :music)
 		@title = "Shortlist - Music"
 	elsif @category == "pictures"
-		@links = Link.all(:media_type => :pictures)
+		@links = Link.all(:media_type => :picture)
 		@title = "Shortlist - Pictures"
 	elsif @category == "gifs"
 		@links = Link.all(:media_type => :gif)

@@ -284,6 +284,31 @@ post "/settings" do
 	end
 end
 
+get "/category/:name" do
+	category = params[:name].downcase
+	@display_nav_avatar = true
+	@title = "Shortlist - Sure that's a category?"
+
+	if category == "videos"
+		@links = Link.all(:media_type => :video)
+		@title = "Shortlist - Videos"
+	elsif category == "music"
+		@links = Link.all(:media_type => :music)
+		@title = "Shortlist - Music"
+	elsif category == "pictures"
+		@links = Link.all(:media_type => :pictures)
+		@title = "Shortlist - Pictures"
+	elsif category == "gifs"
+		@links = Link.all(:media_type => :gif)
+		@title = "Shortlist - Gifs"
+	elsif category == "articles"
+		@links = Link.all(:media_type => :article)
+		@title = "Shortlist - Articles"
+	end
+
+	erb :index
+end
+
 get "/:username" do
 	#@user = User.get params[:username]
 	@user = User.first(:username => params[:username])

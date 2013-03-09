@@ -240,7 +240,7 @@ html, body {
 	font-weight: 800;
 	text-transform: uppercase;
 	font-size: 0.7em;
-	width: 355px;
+	width: 270px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 40px;
@@ -494,7 +494,7 @@ html, body {
 	width: 920px;
 	-webkit-border-radius: 5px;
 
-	box-shadow:  0 0 2px #050505, 0 0 0 6px #ffffff, 0 0 20px #918282;
+	box-shadow:  0 0 2px #050505, 0 0 0 6px #ffffff, 0 0 10px #918282;
 }
 
 .log-entry {
@@ -523,6 +523,7 @@ html, body {
 	display: inline-block;
 	width: 500px;
 	vertical-align: top;
+	font-weight: 500;
 }
 
 #hero {
@@ -587,7 +588,7 @@ html, body {
 	opacity: 1;
 	width: 80%;
 	height: 100%;
-	margin-top: 20px;
+	margin-top: 40px;
 	margin-bottom: 20px;
 	font-family: 'Open Sans', sans-serif;
 }

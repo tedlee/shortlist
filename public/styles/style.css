@@ -281,17 +281,43 @@ html, body {
 	margin-top: 15px;
 }
 
-.short-cover {
+.short-cover-container {
 	margin-right: auto;
 	margin-left: auto;
-	width: 100%;
-	background-repeat: no-repeat;
-	height: 550px; 
-	background-size: cover;
-	background-position: 50% 50%;
 	border-bottom-color: rgb(57, 57, 57);
 	border-bottom-width: 1px;
 	border-style: solid;
+	position: relative;
+	width: 100%;
+	background-repeat: no-repeat;
+	height: 550px;
+	overflow: hidden;
+}
+
+.short-cover {
+	background-size: contain;
+	background-position: 50% 50%;
+	z-index: 20;
+	position: absolute;
+	width: 100%;
+	background-repeat: no-repeat;
+	height: 548px;
+}
+
+.short-cover-background {
+	background-size: cover;
+	background-position: 50% 50%;
+	width: 110%;
+	background-repeat: no-repeat;
+	height: 550px;
+	z-index: 0;
+	position: absolute;
+	opacity: 0.8;
+	filter: blur(10px);
+		-webkit-filter: blur(10px);
+		-moz-filter: blur(10px);
+		-o-filter: blur(10px);
+		-ms-filter: blur(10px);
 }
 
 #short-details {

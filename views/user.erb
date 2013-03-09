@@ -55,7 +55,10 @@
 				</div>
 
 				<% if %w[.png .jpg .gif .bmp].include? File.extname(link.url) %>
-					<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
+					<div class="short-cover-container">
+						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
+						<div class="short-cover-background" style="background-image:url('<%= link.url %>')"></div>
+					</div>
 				<% elsif link.url[/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/] %>
 					<%= youtube_embed(link.url) %>
 				<% elsif link.url[/(vimeo\.com\/)/] %>

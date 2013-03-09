@@ -312,12 +312,12 @@ html, body {
 	height: 550px;
 	z-index: 0;
 	position: absolute;
-	opacity: 0.8;
-	filter: blur(10px);
-		-webkit-filter: blur(10px);
-		-moz-filter: blur(10px);
-		-o-filter: blur(10px);
-		-ms-filter: blur(10px);
+	opacity: 0.5;
+	filter: blur(40px);
+		-webkit-filter: blur(40px);
+		-moz-filter: blur(40px);
+		-o-filter: blur(40px);
+		-ms-filter: blur(40px);
 }
 
 #short-details {

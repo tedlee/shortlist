@@ -56,7 +56,7 @@ class Link
 	property :id,				Serial
 	property :url,				String, :length => 500, required: true
 	property :title,			String, :length => 120, required: true
-	property :num_favourites,	Integer, required: false, default: 1
+	property :num_favourites,	Integer, required: false, default: 0
 	property :user_id,			Integer, required: false
 	property :media_type,		Enum[ :video, :music, :article, :picture, :gif, :misc ], :default => :misc
 	property :site_type,		Enum[ :youtube, :vimeo, :soundcloud, :misc ], :default => :misc

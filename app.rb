@@ -60,6 +60,7 @@ class Link
 	property :user_id,			Integer, required: false
 	property :media_type,		Enum[ :video, :music, :article, :picture, :gif, :misc ], :default => :misc
 	property :site_type,		Enum[ :youtube, :vimeo, :soundcloud, :misc ], :default => :misc
+	property :cover_yposition,	Integer, required: false, default: 50
 	#property :description,		String, :length => 120
 	property :created_at, 		DateTime
 

@@ -312,12 +312,7 @@ html, body {
 	height: 550px;
 	z-index: 0;
 	position: absolute;
-	opacity: 0.5;
-	filter: blur(40px);
-		-webkit-filter: blur(40px);
-		-moz-filter: blur(40px);
-		-o-filter: blur(40px);
-		-ms-filter: blur(40px);
+	background-color: #656262;
 }
 
 #short-details {

@@ -54,11 +54,7 @@
 					</div> 
 				</div>
 
-				<% if %w[.png .jpg .bmp].include? File.extname(link.url) %>
-					<div class="short-cover-container">
-						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
-					</div>
-				<% elsif %w[.gif].include? File.extname(link.url) %>
+				<% if %w[.png .jpg .bmp .gif].include? File.extname(link.url) %>
 					<div class="short-cover-container">
 						<div class="short-cover" style="background-image:url('<%= link.url %>')"></div>
 					</div>

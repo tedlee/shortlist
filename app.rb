@@ -222,11 +222,21 @@ get '/signS3put' do
 	}.to_json
 end
 
+get "/add" do
+	@user = User.get(env['warden'].user.id)
+
+	if (env['warden'].authenticate)
+		@display_nav_avatar = true
+		@title = "Add a link to Shortlist"
+		erb :add
+	else
+		"Login before you can add anything to Shortlist."
+	end
+end
+
 post "/:username/add" do
 	#@user = User.get params[:username]
 	@user = User.get(env['warden'].user.id)
-
-	puts "username submitted is: #{@user.username} and id is: #{@user.id}"
 
 	# Checks to make sure that person is signed in before submitting link
 	if (@user && env['warden'].authenticate) && @user.id == env['warden'].user.id

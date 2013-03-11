@@ -203,9 +203,9 @@ html, body {
 
 	display: block;
 	border-radius: 8px;
-	box-shadow: 0 0 0 1px #050505, 0 0 5px #918282;
+	box-shadow: 0 0 0 2px #050505;
 
-	background-image: url(../images/time-bar.jpg);
+	background-color: white;
 	background-position: 0px -1px;
 	background-repeat: repeat-x;
 }
@@ -350,16 +350,43 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-.short-title a{
+.short-title a, .short-title{
 	display: inline-block;
 	float: left;
 	margin-left: 10px;
 	text-decoration: none;
 	color: black;
+	font-size: 15px;
 }
 
 .short-title a:hover{
 	text-decoration: underline;
+}
+
+.short-title-edit {
+	border: 1px solid #050505;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	outline: none;
+	background-color: #ffffff;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #383838;
+	padding: 2px 8px;
+	text-decoration: none;
+	display: inline-block;
+	font-family: 'Open Sans', sans-serif;
+	letter-spacing: 1px;
+	vertical-align: middle;
+	margin-top:-5px; 
+	font-size: 15px; 
+	width:800px;
+}
+
+.char-count{
+	float: right;
+	padding-right: 20px;
 }
 
 .short-link a{

@@ -240,6 +240,7 @@ post "/:username/add" do
 
 	# Checks to make sure that person is signed in before submitting link
 	if (@user && env['warden'].authenticate) && @user.id == env['warden'].user.id
+
 		@link = Link.create(:url => params[:url], :title => params[:title], :user_id => @user.id, :created_at => Time.now)
 
 		if %w[.png .jpg .gif .bmp].include? File.extname(@link.url)
@@ -258,7 +259,7 @@ post "/:username/add" do
 			@link.update(:media_type => :misc, :site_type => :misc)
 		end
 
-		redirect back
+		redirect "/#{@user.username}"
 	else
 		redirect back
 	end

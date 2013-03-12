@@ -8,10 +8,10 @@
 
 <div id="signup-box">
 	<form action="/signup" method="post">
-		<input type="text" class="link-input" name="username" placeholder="Username" autofocus/>
-		<input type="password" class="link-input" name="password" placeholder="Password"/>
+		<input type="text" class="link-input" name="username" placeholder="Username" autofocus required/>
+		<input type="password" class="link-input" name="password" placeholder="Password" required/>
 		<input type="text" class="link-input" name="fullname" placeholder="Your Full Name"/>
-		<input type="text" class="link-input" name="user_email" placeholder="Your Email"/>
+		<input type="email" class="link-input" name="user_email" placeholder="Your Email" required/>
 		<input type="text" style="display:none" class="link-input" name="user_avatar" placeholder="Your Avatar (URL)"/>
 
 		<!-- This is quite a hacky way to style an input box. My eyes bleed just looking at this -->

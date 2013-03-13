@@ -1,0 +1,105 @@
+
+
+<div id="add-bar" style="width:445px; margin-top:46px; height:75px; ">
+
+	<label style="display:block; margin-bottom:5px; margin-top:5px;">What's the best thing on the Internet right now?</label>
+	<input type="url" style="margin-top: 0px; margin-left: 5px; margin-bottom: 15px; width:370px" class="link-input" name="fake-url" placeholder="Link (Image, YouTube, Vimeo, SoundCloud)" autocomplete="off"/>
+
+	<div class="url-note" style="font-size:12px; position:relative; color: #656262; width: 250px; margin-left: 460px; margin-top:-55px; text-align: left; line-height:16px;"></div>
+</div>
+
+
+<div id="shorts" style="margin-top:-20px">
+
+	<h2 style="margin-bottom:20px; font-size: 16px; font-weight: 600; color: #656262;">Preview</h2> 
+
+	<div class="short-container">
+
+		<div id="short-details" style="padding-bottom: 10px; padding-left: 10px;">
+			<form id="add-link-form" action="/<%= env['warden'].user.username %>/add" method="post">
+				<input type="text" class="short-title-edit" name="title" placeholder="Write a short title..." autocomplete="off"/>
+				<input type="url" style="display:none" name="url"/>
+				<div class="char-count">120</div>
+				<input type="submit" style="width: 120px; padding-top: 0px; padding-bottom: 2px; margin-top:-5px; margin-right: 10px; float:right; text-transform: none;" class="button" value="Add Link">
+			</form>
+		</div>
+
+		<div class="short-cover-container">
+			<div class="short-cover" style="background-image:url('http://farm9.staticflickr.com/8250/8473268091_262cda1492_c.jpg')"> </div>
+		</div>
+
+		<div id="bottom-bar" style="height:30px;">
+
+		</div> 
+
+	</div> 
+
+</div>
+
+<script>
+window.onload=function(){
+	$(".short-title-edit").bind('keydown keyup paste', function() {
+		numChar = $(".short-title-edit").val().length;
+		charsLeft = 120 - numChar;
+		$(".char-count").empty();
+		if (charsLeft >= 20) {
+			$(".char-count").css("color","#383838")
+		}else if (charsLeft <= 10) {
+			$(".char-count").css("color","#e9152b")
+		}
+		$(".char-count").text(charsLeft);
+	})
+
+	$('input[name="fake-url"]').bind('keyup keydown paste' ,function() {
+		// Check if valid url
+		// if valid URL check if it's an image
+		
+		var _this = this;
+		// Short pause to wait for paste to complete
+		setTimeout( function() {
+			var url = $(_this).val();
+			tryRenderPreview(url);
+		}, 0);
+	})
+
+	// A small trick I have learned is to use a setTimeout delay of 0, 
+	// this sends the function to the bottom of the rendering stack, 
+	// allows the text to be added to the textbox then executes the code.
+
+	$(".short-title-edit").on('focus blur', function() {
+		tryRenderPreview();
+	})
+
+	function tryRenderPreview(url) {
+		currentURL = url;
+		var tempImage = new Image()
+		tempImage.src = currentURL;
+		if (tempImage.width > 0){
+			console.log("valid image")
+			$('.short-cover').css("background-image", 'url(' + tempImage.src + ')');
+			if (tempImage.width < 900){
+				$('.url-note').text("To make images look great on Shortlist try to make sure they're atleast 900 pixels wide. This one is " + tempImage.width + " pixels wide.");
+			}
+		}
+	}
+
+	$(function() {
+		$('#add-link-form').submit(function() {
+			$('input[name="url"]').val($('input[name="fake-url"]').val())
+			return true;
+		})
+	})
+
+	$(".short-cover").bind('mousedown',function() {
+		$(this).mousedown(function(e) {
+			var parentOffset = $(this).parent().offset();
+			var relX = e.pageX - parentOffset.left;
+			var relY = e.pageY - parentOffset.top;
+			console.log(relX + " and " + relY);
+		});
+	});
+}
+</script>
+
+
+

@@ -50,7 +50,7 @@ window.onload=function(){
 		$(".char-count").text(charsLeft);
 	})
 
-	$('input[name="fake-url"]').bind('keyup keydown paste' ,function() {
+	$('input[name="fake-url"]').bind('keydown paste' ,function() {
 		// Check if valid url
 		// if valid URL check if it's an image
 		
@@ -70,8 +70,9 @@ window.onload=function(){
 		tryRenderPreview();
 	})
 
-	function tryRenderPreview(url) {
-		currentURL = url;
+	function tryRenderPreview(currentURL) {
+		var youtubeRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+		var match = currentURL.match(youtubeRegex);
 		var tempImage = new Image()
 		tempImage.src = currentURL;
 		if (tempImage.width > 0){
@@ -79,9 +80,14 @@ window.onload=function(){
 			$('.short-cover').css("background-image", 'url(' + tempImage.src + ')');
 			if (tempImage.width < 900){
 				$('.url-note').text("To make images look great on Shortlist try to make sure they're atleast 900 pixels wide. This one is " + tempImage.width + " pixels wide.");
-			}
+			}	
+		} else if (match&&match[2].length==11){
+			console.log("We have YouTube!")
+			var ytObj = '<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/' + match[2] + '?autoplay=0&iv_load_policy=3&rel=0&theme=light&color=white&controls=2&showinfo=0&autohide=1&loop=0&wmode=transparent&modestbranding=1&html5=1" ></iframe>';
+			$('.short-cover').html(ytObj);
 		}
 	}
+
 
 	$(function() {
 		$('#add-link-form').submit(function() {

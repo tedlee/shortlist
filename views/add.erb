@@ -119,6 +119,17 @@ window.onload=function(){
 				var vimeoObj = '<iframe src="//player.vimeo.com/video/' + matchVimeo[2] + '?portrait=0&color=EB5858" width="100%" height="550" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 				$('.short-cover').html(vimeoObj);
 			}
+			var soundcloudRegex = /(https?:\/\/)?(www.)?soundcloud\.com\/.*/;
+			var matchSoundcloud = currentURL.match(soundcloudRegex);
+			if (matchSoundcloud) {
+				console.log("We have SoundCloud!")
+				$('.short-cover-container').css("height", "166px");
+				$('.url-note').empty();
+				displayedPreview = currentURL
+				var soundcloudObj = '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=' + matchSoundcloud[0] + '&show_artwork=true&maxwidth=&maxheight=500&auto_play=false&show_comments=false"></iframe>';
+				console.log(soundcloudObj)
+				$('.short-cover').html(soundcloudObj);
+			}
 		}
 	}
 

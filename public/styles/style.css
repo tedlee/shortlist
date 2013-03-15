@@ -302,6 +302,19 @@ html, body {
 	width: 100%;
 	background-repeat: no-repeat;
 	height: 548px;
+	transition: background-image 0.5s ease-in-out;
+	-webkit-transition: background-image 0.5s ease-in-out;
+	-moz-transition: background-image 0.5s ease-in-out;
+	-o-transition: background-image 0.5s ease-in-out;
+	transition: background-image 0.5s ease-in-out;
+}
+
+.short-cover-container {
+	transition: height 1s;
+	-moz-transition: height 1s; /* Firefox 4 */
+	-webkit-transition: height 1s; /* Safari and Chrome */
+	-o-transition: height 1s; /* Opera */
+	-ms-transition: height 1s; /* IE9 (maybe) */
 }
 
 .short-cover-background {

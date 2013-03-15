@@ -97,15 +97,16 @@ window.onload=function(){
 					displayedPreview = currentURL
 					if (tempImage.width < 900){
 						$('.url-note').text("To make images look great on Shortlist try to make sure they're atleast 900 pixels wide. This one is " + tempImage.width + " pixels wide.");
-					}	
-				} else if (matchYouTube&&matchYouTube[2].length==11){
-					console.log("We have YouTube!")
-					$('.short-cover-container').css("height", "550px");
-					$('.url-note').empty();
-					displayedPreview = currentURL
-					var ytObj = '<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/' + matchYouTube[2] + '?autoplay=0&iv_load_policy=3&rel=0&theme=light&color=white&controls=2&showinfo=0&autohide=1&loop=0&wmode=transparent&modestbranding=1&html5=1" ></iframe>';
-					$('.short-cover').html(ytObj);
+					}
 				}
+			} 
+			if (matchYouTube&&matchYouTube[2].length==11){
+				console.log("We have YouTube!")
+				$('.short-cover-container').css("height", "550px");
+				$('.url-note').empty();
+				displayedPreview = currentURL
+				var ytObj = '<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/' + matchYouTube[2] + '?autoplay=0&iv_load_policy=3&rel=0&theme=light&color=white&controls=2&showinfo=0&autohide=1&loop=0&wmode=transparent&modestbranding=1&html5=1" ></iframe>';
+				$('.short-cover').html(ytObj);
 			}
 		}
 	}

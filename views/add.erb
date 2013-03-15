@@ -82,8 +82,6 @@ window.onload=function(){
 		console.log("trying to render preview. Current url entered: " + currentURL + " and displayedPreview is: " + displayedPreview )
 		if (currentURL != displayedPreview) {
 			console.log("Different url")
-			var youtubeRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-			var matchYouTube = currentURL.match(youtubeRegex);
 			var tempImage = new Image()
 			tempImage.src = currentURL;
 			tempImage.onload = function() {
@@ -99,7 +97,10 @@ window.onload=function(){
 						$('.url-note').text("To make images look great on Shortlist try to make sure they're atleast 900 pixels wide. This one is " + tempImage.width + " pixels wide.");
 					}
 				}
-			} 
+			}
+
+			var youtubeRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+			var matchYouTube = currentURL.match(youtubeRegex);
 			if (matchYouTube&&matchYouTube[2].length==11){
 				console.log("We have YouTube!")
 				$('.short-cover-container').css("height", "550px");
@@ -107,6 +108,16 @@ window.onload=function(){
 				displayedPreview = currentURL
 				var ytObj = '<iframe title="YouTube video player" width="100%" height="550" src="http://www.youtube.com/embed/' + matchYouTube[2] + '?autoplay=0&iv_load_policy=3&rel=0&theme=light&color=white&controls=2&showinfo=0&autohide=1&loop=0&wmode=transparent&modestbranding=1&html5=1" ></iframe>';
 				$('.short-cover').html(ytObj);
+			}
+			var vimeoRegex = /https?:\/\/(www.)?vimeo\.com\/([A-Za-z0-9._%-]*)((\?|#)\S+)?/;
+			var matchVimeo = currentURL.match(vimeoRegex);
+			if (matchVimeo && matchVimeo[2].length > 6) {
+				console.log("We have Vimeo!")
+				$('.short-cover-container').css("height", "550px");
+				$('.url-note').empty();
+				displayedPreview = currentURL
+				var vimeoObj = '<iframe src="//player.vimeo.com/video/' + matchVimeo[2] + '?portrait=0&color=EB5858" width="100%" height="550" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+				$('.short-cover').html(vimeoObj);
 			}
 		}
 	}

@@ -26,8 +26,8 @@
 						<% if @display_nav_avatar == true %>
 							<a href="/<%= env['warden'].user.username %>"><div style="background-image:url('<%= User.get(env['warden'].user.id).user_avatar %>')" class="nav-avatar"></div></a>
 						<% end %>
-						<div class="right-button"><a href="/logout">Logout</a></div>
 						<div class="right-button"><a href="/settings">Settings</a></div>
+						<div class="right-button"><a href="/add"><span style="font-weight:800">+</span> New Short</a></div>
 					</div>
 				</div>
 			<% else %>

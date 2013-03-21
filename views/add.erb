@@ -15,12 +15,12 @@
 
 	<div class="short-container">
 
-		<div id="short-details" style="padding-bottom: 10px; padding-left: 10px;">
+		<div id="short-details" style="padding-left: 10px;">
 			<form id="add-link-form" action="/<%= env['warden'].user.username %>/add" method="post">
 				<input type="text" class="short-title-edit" name="title" placeholder="Write a short title..." autocomplete="off"/>
 				<input type="url" style="display:none" name="url"/>
 				<div class="char-count">120</div>
-				<input type="submit" style="width: 120px; padding-top: 0px; padding-bottom: 2px; margin-top:-5px; margin-right: 10px; float:right; text-transform: none;" class="button" value="Add Link">
+				<input type="submit" style="width: 120px; padding-top: 0px; padding-bottom: 2px; margin-top:6px; margin-right: 10px; float:right; text-transform: none;" class="button" value="Add Link">
 			</form>
 		</div>
 
@@ -88,6 +88,7 @@ window.onload=function(){
 				console.log("Width of temp image: " + tempImage.width)
 				if (tempImage.width > 0){
 					console.log("valid image")
+					$('.short-container').css("opacity", "1");
 					$('.short-cover').empty();
 					$('.url-note').empty();
 					$('.short-cover').css("background-image", 'url(' + tempImage.src + ')');
@@ -102,6 +103,7 @@ window.onload=function(){
 			var youtubeRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
 			var matchYouTube = currentURL.match(youtubeRegex);
 			if (matchYouTube&&matchYouTube[2].length==11){
+				$('.short-container').css("opacity", "1");
 				console.log("We have YouTube!")
 				$('.short-cover-container').css("height", "550px");
 				$('.url-note').empty();
@@ -112,6 +114,7 @@ window.onload=function(){
 			var vimeoRegex = /https?:\/\/(www.)?vimeo\.com\/([A-Za-z0-9._%-]*)((\?|#)\S+)?/;
 			var matchVimeo = currentURL.match(vimeoRegex);
 			if (matchVimeo && matchVimeo[2].length > 6) {
+				$('.short-container').css("opacity", "1");
 				console.log("We have Vimeo!")
 				$('.short-cover-container').css("height", "550px");
 				$('.url-note').empty();
@@ -122,6 +125,7 @@ window.onload=function(){
 			var soundcloudRegex = /(https?:\/\/)?(www.)?soundcloud\.com\/.*/;
 			var matchSoundcloud = currentURL.match(soundcloudRegex);
 			if (matchSoundcloud) {
+				$('.short-container').css("opacity", "1");
 				console.log("We have SoundCloud!")
 				$('.short-cover-container').css("height", "166px");
 				$('.url-note').empty();
@@ -132,15 +136,6 @@ window.onload=function(){
 			}
 		}
 	}
-
-
-	// function getYouTubeID(currentURL){
-	// 	var youtubeRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-	// 	var match = currentURL.match(youtubeRegex);
-	// 	if ( match ) {
-	// 		return match
-	// 	}
-	// }
 
 	$(function() {
 		$('#add-link-form').submit(function() {
